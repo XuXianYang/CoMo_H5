@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.school.dao.QuizScoreDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.school.dto.QuizScoreDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="quiz_id" property="quizId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="student_id" property="studentId" jdbcType="BIGINT" />
+    <result column="school_id" property="schoolId" jdbcType="BIGINT" />
+    <result column="enrol_year" property="enrolYear" jdbcType="INTEGER" />
+    <result column="class_id" property="classId" jdbcType="BIGINT" />
+    <result column="score" property="score" jdbcType="REAL" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, quiz_id, course_id, student_id, school_id, enrol_year, class_id, score, created_by, updated_by,
+    created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from quiz_score
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from quiz_score
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.school.dto.QuizScoreDto" useGeneratedKeys="true" keyProperty="id" >
+    insert into quiz_score (quiz_id, course_id, student_id,
+      school_id, enrol_year, class_id, 
+      score, created_by, created_at)
+    values (#{quizId,jdbcType=BIGINT}, course_id, #{studentId,jdbcType=BIGINT},
+      #{schoolId,jdbcType=BIGINT}, #{enrolYear,jdbcType=INTEGER}, #{classId,jdbcType=BIGINT}, 
+      #{score,jdbcType=REAL}, #{createdBy,jdbcType=BIGINT}, now())
+  </insert>
+
+    <select id="getScoreOfStudent" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from quiz_score
+        where quiz_id = #{quizId} and student_id = #{studentId}
+    </select>
+
+    <insert id="batchInsert" parameterType="com.dianxian.school.dto.QuizScoreDto" >
+        insert into quiz_score (quiz_id, course_id, student_id,
+        school_id, enrol_year, class_id,
+        score, created_by, created_at)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+        (#{item.quizId,jdbcType=BIGINT}, #{item.courseId,jdbcType=BIGINT}, #{item.studentId,jdbcType=BIGINT},
+        #{item.schoolId,jdbcType=BIGINT}, #{item.enrolYear,jdbcType=INTEGER}, #{item.classId,jdbcType=BIGINT},
+        #{item.score,jdbcType=REAL}, #{item.createdBy,jdbcType=BIGINT}, now())
+        </foreach>
+    </insert>
+    <update id="updateScore" parameterType="com.dianxian.school.dto.QuizScoreDto" >
+        update quiz_score
+        set score = #{score,jdbcType=VARCHAR},
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        updated_at = now()
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getScoreOfClass" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from quiz_score
+        where quiz_id = #{quizId} and class_id = #{classId}
+    </select>
+
+    <select id="getScoresOfStudent" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from quiz_score
+        where student_id = #{studentId} and quiz_id in
+        <foreach item="item" index="index" collection="quizIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getClassAvgScore" resultType="Float">
+        select
+        avg(score)
+        from quiz_score
+        where quiz_id = #{quizId} and class_id = #{classId}
+    </select>
+
+    <select id="getGradeAvgScore" resultType="Float">
+        select
+        avg(score)
+        from quiz_score
+        where quiz_id = #{quizId} and school_id = #{schoolId} and enrol_year = #{enrolYear}
+    </select>
+
+</mapper>

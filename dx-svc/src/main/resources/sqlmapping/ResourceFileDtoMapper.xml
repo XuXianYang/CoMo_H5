@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.storage.dao.ResourceFileDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.storage.dto.ResourceFileDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bucket" property="bucket" jdbcType="VARCHAR" />
+    <result column="url_prefix" property="urlPrefix" jdbcType="VARCHAR" />
+    <result column="relative_path" property="relativePath" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bucket, url_prefix, relative_path, name, category, created_by, updated_by, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from resource_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from resource_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.storage.dto.ResourceFileDto" useGeneratedKeys="true" keyProperty="id" >
+    insert into resource_file (bucket, url_prefix,
+      relative_path, name, category, created_by, created_at)
+    values (#{bucket,jdbcType=VARCHAR}, #{urlPrefix,jdbcType=VARCHAR},
+      #{relativePath,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+      #{createdBy,jdbcType=BIGINT}, now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.storage.dto.ResourceFileDto" >
+    insert into resource_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bucket != null" >
+        bucket,
+      </if>
+      <if test="urlPrefix != null" >
+        url_prefix,
+      </if>
+      <if test="relativePath != null" >
+        relative_path,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bucket != null" >
+        #{bucket,jdbcType=VARCHAR},
+      </if>
+      <if test="urlPrefix != null" >
+        #{urlPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="relativePath != null" >
+        #{relativePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.storage.dto.ResourceFileDto" >
+    update resource_file
+    <set >
+      <if test="bucket != null" >
+        bucket = #{bucket,jdbcType=VARCHAR},
+      </if>
+      <if test="urlPrefix != null" >
+        url_prefix = #{urlPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="relativePath != null" >
+        relative_path = #{relativePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.storage.dto.ResourceFileDto" >
+    update resource_file
+    set bucket = #{bucket,jdbcType=VARCHAR},
+      url_prefix = #{urlPrefix,jdbcType=VARCHAR},
+      relative_path = #{relativePath,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,14 @@
+
+.no-student{padding-top: 2rem;}
+.no-student .no-student-bg{background: url(../img/no_child.png) center no-repeat;
+  background-size:cover; width: 9rem; height: 8.5rem; margin: 0 auto;}
+.no-student .no-student-lab{text-align: center; padding: 1rem 0; color:#999; }
+.no-student .no-student-btn{width: 6rem; margin: 1rem auto;}
+
+
+.have-student{ padding: 0.75rem;}
+.have-student .list-block{margin: 0;}
+.have-student .list-block ul{background:transparent;}
+.have-student .item-content{margin-bottom: 0.75rem;padding: 0.5rem;background: #fff;}
+.have-student .list-block .item-subtitle{color:#999;}
+.default-student{font-size: 0.7rem; color:#090;}

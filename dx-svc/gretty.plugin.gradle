@@ -1,0 +1,49 @@
+print System.getProperty("work.home")
+buildscript {
+    repositories {
+        def repos = new ArrayList();
+        File file = file("gradle.properties");
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String tempString = null;
+            int line = 1;
+            // 一次读入一行，直到读入null为文件结束
+            while ((tempString = reader.readLine()) != null) {
+                // 显示行号
+                System.out.println("line " + line + ": " + tempString);
+                line++;
+                int index = tempString.indexOf("=");
+                if (0 >= index) {
+                    continue;
+                }
+                String key = tempString.substring(0, index);
+                if (key.startsWith("repository.")) {
+                    repos.add(tempString.substring(index + 1));
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+        repos.each {
+            println it
+            def repoUrl = new URL(it)
+            maven { url repoUrl }
+        }
+    }
+
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:+'
+    }
+}
+
+if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
+    project.apply(plugin: org.akhikhl.gretty.GrettyPlugin)

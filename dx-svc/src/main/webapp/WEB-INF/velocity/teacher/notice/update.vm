@@ -1,0 +1,67 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "公告 － 点线")
+#set($styles = ["teacher/homework.css"])
+#set($scripts = ["teacher/my-notice.js"])
+<script>
+    window.currentPage = "my-publishment";
+</script>
+<div class="dx-conwrap">
+    #set($toptab="notice")
+    #parse("teacher/module/toptab.vm")
+
+    <input type="hidden" value="$!noticeinfo.id" id="noticeId" />
+    <div class="dx-subtab">
+        <ul>
+            <li class="active">
+                <a href="${contextPath}${servletPath}/teacher/notice/do">发布公告</a>
+            </li>
+            <li >
+                <a href="${contextPath}${servletPath}/teacher/notice">已发布</a>
+            </li>
+        </ul>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>选择班级：
+            </label>
+            <div class="f-con">
+                <select id="J_class">
+                    #foreach($class in $joinclass)
+                        <option #if($!class.id==$!noticeinfo.classId)selected#end  value="$!class.id">$!class.name</option>
+                    #end
+                </select>
+                <div class="errormsg"></div>
+            </div>
+        </div>
+
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>标题：
+            </label>
+            <div class="f-con">
+                <input id="J_title" type="text" value="$!noticeinfo.title" maxlength="20" class="input-text" placeholder="请输入标题，20字以内">
+                <div class="errormsg"></div>
+            </div>
+        </div>
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>内容：
+            </label>
+            <div class="f-con">
+                <textarea id="J_content" class="textarea" placeholder="请输入内容，200字以内">$!noticeinfo.content</textarea>
+                <div class="errormsg"></div>
+            </div>
+        </div>
+
+        <div class="dx-col cl">
+            <label class="f-lab">
+            </label>
+            <div class="f-con">
+                <input class="btn radius btn-warning" id="J_pubnotice" type="button" value="保存">
+
+            </div>
+        </div>
+    </form>
+
+</div>

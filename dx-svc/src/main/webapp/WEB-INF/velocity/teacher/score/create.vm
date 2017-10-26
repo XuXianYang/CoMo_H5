@@ -1,0 +1,84 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "发布成绩 － 我的发布")
+#set($styles = ["teacher/my-publishment.css", "teacher/my-publishment-score.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js","teacher/my-publishment.js", "teacher/score.js"])
+#set($libstyles = ["handsontable/0.28.0/handsontable.full.min.css"])
+#set($libscripts = ["handsontable/0.28.0/handsontable.full.min.js"])
+
+
+<div class="dx-conwrap">
+    #set($toptab="score")
+    #parse("teacher/module/toptab.vm")
+    <div class="dx-subtab">
+        <ul>
+            <li class="active">
+                <a>发布成绩</a>
+            </li>
+            <li>
+               <a href="${contextPath}/web/teacher/score/list">已发布</a>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+    	#if($!emptyCourseList)
+    	您还没有在任何班级任课，请先加入班级！
+    	#elseif($!emptyQuizList)
+    	您的班级还没有安排任何考试。请先安排考试！
+    	#else
+        <form class="form form-add-score" method="post" enctype="multipart/form-data">
+            <div class="dx-col cl">
+                <label class="f-lab">
+                    选择班级：
+                </label>
+                <div id='reciever-selection' class="f-con btn-selector-group"
+                  data-value="$!{currentClass.id}"
+                  data-type="radio">
+                  #foreach($theClass in $joinedClasses)
+          				<a href="${contextPath}/web/teacher/score/create?classId=${theClass.id}&courseId=$!{currentCourse.id}&quizId=$!{currentCourseQuiz.quiz.id}" class="btn btn-selector"
+          					data-value="${theClass.id}">${theClass.name}</a>
+          			#end
+                </div>
+            </div>
+            <div class="dx-col cl">
+                <label class="f-lab">
+                    选择课程：
+                </label>
+                <div id='reciever-selection' class="f-con btn-selector-group"
+                  data-value="$!{currentCourse.id}"
+                  data-type="radio">
+                  	#foreach($theCourse in $assignedCourses)
+           				<a href="${contextPath}/web/teacher/score/create?classId=${currentClass.id}&courseId=$!{theCourse.id}&quizId=$!{currentCourseQuiz.quiz.id}" class="btn btn-selector"
+           					data-value="${theCourse.id}">${theCourse.name}</a>
+            		#end
+                </div>
+            </div>
+			<div class="dx-col cl">
+                <label class="f-lab">
+                    选择考试：
+                </label>
+                <div id='reciever-selection' class="f-con btn-selector-group"
+                  data-value="$!{currentCourseQuiz.quiz.id}"
+                  data-type="radio">
+                  	#foreach($theCourseQuiz in $allCourseQuizes)
+           				<a href="${contextPath}/web/teacher/score/create?classId=${currentClass.id}&courseId=$!{currentCourse.id}&quizId=$!{theCourseQuiz.quiz.id}" class="btn btn-selector"
+           					data-value="${theCourseQuiz.quiz.id}">${theCourseQuiz.quiz.name}</a>
+            		#end
+                </div>
+            </div>
+            <div id="score-list" class="score-list">
+
+            </div>
+            <div class="dx-col cl btn-publish-score-wrapper">
+                <label class="f-lab"></label>
+                <div class="f-con">
+                    <input class="btn radius btn-publish-score" type="button" value="立即发布">
+                </div>
+            </div>
+        </form>
+		#end
+    </div>
+		<script id="students-json-input" type="type/json">$!students</script>
+    <input id="class-input" type="hidden" value="$!currentClass.id">
+    <input id="quiz-input" type="hidden" value="$!currentCourseQuiz.quiz.id">
+</div>

@@ -1,0 +1,51 @@
+#set($layout = "layout/sysadmin_layout.vm")
+#set($pageTitle = "学校列表")
+#set($scripts = ["js/sysadmin/school_list.js"])
+<input type="hidden" id="currentPage" value="${data.pageNum}">
+<input type="hidden" id="pageCount" value="${data.pages}">
+<div class="main-wide-wrap">
+    <div class="page-title">
+        $pageTitle
+    </div>
+    <div>
+        <a href="${contextPath}${servletPath}/sysadmin/school/create" class="ui teal button">创建学校</a>
+    </div>
+    <table class="ui celled striped table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>编码</th>
+                <th>类型</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            #foreach($school in $data.list)
+            <tr>
+                <td>
+                    $!{school.id}
+                </td>
+                <td>
+                    $!{school.name}
+                </td>
+                <td>
+                    $!{school.code}
+                </td>
+                <td>
+                    ${DisplayUtils.getSchoolCategory(${school.category})}
+                </td>
+                <td>
+                    <a href="update?id=${school.id}">编辑</a>
+                </td>
+            </tr>
+            #end
+        </tbody>
+        <tfoot>
+        <tr><th colspan="5">
+            <div id="paging-container" class="ui right floated pagination menu">
+            </div>
+        </th>
+        </tr></tfoot>
+    </table>
+</div>

@@ -1,0 +1,61 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "公告列表 － 点线")
+#set($styles = ["teacher/homework.css"])
+#set($scripts = ["teacher/my-notice.js"])
+<script>
+    window.currentPage = "my-publishment";
+</script>
+<div class="dx-conwrap">
+    #set($toptab="notice")
+    #parse("teacher/module/toptab.vm")
+    <div class="dx-subtab">
+        <ul>
+            <li>
+                <a href="${contextPath}${servletPath}/teacher/notice/do">发布公告</a>
+            </li>
+            <li class="active">
+                <a href="${contextPath}${servletPath}/teacher/notice">已发布</a>
+            </li>
+        </ul>
+    </div>
+    #if($joinclass.size()>0)
+
+    <div class="selclass">
+        <label>选择班级：</label>
+        <select class="J_changeClass">
+            #foreach($class in $joinclass)
+                <option #if($selclsss==$class.id) selected #end  value="$!class.id">$!class.name</option>
+            #end
+        </select>
+    </div>
+    #end
+    <table class="table table-border table-hover student-list">
+        <thead>
+        <tr>
+            <th style="width:120px;">发布时间</th>
+            <th style="width:250px;">标题</th>
+            <th>内容</th>
+            <th style="width: 100px;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            #foreach($item in $pagingInfo.list)
+            <tr>
+                <td>$!DisplayUtils.formatDateTime($item.createdAt)
+                </td>
+                <td>$!item.title</td>
+                <td>$!item.content</td>
+                <td><a href="${contextPath}${servletPath}/teacher/notice/update?id=$item.id" >编辑</a> </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+    #if($pagingInfo.list.size()>0)
+        <div class="pager pager-bottom">
+            #set($pageUrl="${contextPath}${servletPath}/teacher/notice?classid=$!{selclsss}&")
+            #parse("teacher/module/pageer.vm")
+        </div>
+    #else
+        <div class="Huialert Huialert-info"><i class="icon-remove"></i>暂无内容</div>
+    #end
+</div>

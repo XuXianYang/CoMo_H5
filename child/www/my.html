@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" href="css/sm.css">
+        <link rel="stylesheet" href="css/sme.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/my.css">
+        <link rel="stylesheet" href="css/jcrop.css">
+        <title>我的-酷么课堂</title>
+    </head>
+    <body>
+      <div class="page-group">
+        <div class="page page-current">
+          <div class="content" style="padding-bottom:2.5rem;">
+            <div class="dx-my-bg">
+              <a class="dx-my-header" href="#info">
+                <img class="J_avatar" src="./img/nohead.png" />
+              </a>
+              <span class="dx-my-name J_name"></span>
+              <a href="#info" class="edit"></a>
+            </div>
+            <div class="dx-my-menu">
+              <div class="dx-info-top">
+                <span class="dx-info-top-title">个人信息</span>
+              </div>
+              <div class="dx-info-con">
+                <div class="infocol">
+                  <span class="infolab">学校：</span>
+                  <span class="J_school"></span>
+                </div>
+                <div class="infocol">
+                  <span class="infolab">班级：</span>
+                  <span class="J_class"></span>
+                </div>
+                <div class="infocol">
+                  <span class="infolab">入学年份：</span>
+                  <span class="J_year"></span>
+                </div>
+                <div class="infocol">
+                  <span class="infolab">学生码：</span>
+                  <span class="J_parentscode"></span>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="card">
+              <div class="card-content">
+                <div class="list-block">
+                  <ul>
+                    <li>
+                      <a href="setting.html" external class="item-link item-content">
+                        <div class="item-inner">
+                          <div class="item-title settingicon">设置</div>
+                        </div>
+                      </a>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+
+
+          <nav class="bar bar-tab dx-bar">
+            <a class="tab-item external " href="home.html">
+              <span class="icon dx-bottom-icon icon-01"></span>
+              <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item external" href="child.html">
+              <span class="icon dx-bottom-icon icon-02"></span>
+              <span class="tab-label">学习</span>
+
+            </a>
+            <span class="tab-item tab-item-safe">
+              <span class="nav-safe J_showsafe"></span>
+              <div class="safeupbox fn-hide J_safeupbox">
+                <div class="safe-home">
+                  <span class="safe-home-title">到家签到</span>
+                  <span class="safe-home-btn J_send_safehome"></span>
+                  <a  external href="setting.html#safe" class="sefe-setting">预计到达时间：<span class="J_exceptarivetime">--</span></a>
+                </div>
+                <div class="safe-tab">
+                  <span class="safe-tabitem active">
+                    <span>呼救</span>
+                  </span>
+                  <span class="safe-tabitem">
+                    <span>小报告</span>
+                  </span>
+                </div>
+                <div class="safe-danger J_danger">
+                  <textarea class="safecontent J_dangercontent" placeholder="如果你遇到紧急情况，请输入详细内容，50个字以内"></textarea>
+                  <div class="safebtn-box">
+                    <span href="#" class="button button-fill button-warning button-big J_send_dangerbtn">发送求救信息</span>
+                  </div>
+                </div>
+
+                <div class="safe-danger J_msg" style="display:none;">
+                  <textarea class="safecontent J_msgcontent" placeholder="如果你有什么想对老师说，请输入详细内容，50个字以内"></textarea>
+                  <div class="safebtn-box">
+                    <span href="#" class="button button-fill button-warning button-big J_send_msgbtn">发送小报告</span>
+                  </div>
+                </div>
+
+                <span class="safe-up-btn J_hidesafe"></span>
+              </div>
+            </span>
+            <a class="tab-item external" href="group.html">
+              <span class="icon dx-bottom-icon icon-03"></span>
+                <span class="has_new_message">.</span>
+              <span class="tab-label">班群</span>
+
+            </a>
+            <a class="tab-item external active" href="my.html">
+              <span class="icon dx-bottom-icon icon-04"></span>
+              <span class="tab-label">我的</span>
+            </a>
+          </nav>
+
+
+        </div>
+
+        <div class="page dx-common-head dx-myinfo" id="info">
+          <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left back" href="#">
+              <span class="icon icon-left"></span>
+              个人资料
+            </a>
+          </header>
+          <div class="content">
+
+            <div class="content-block">
+              <div class="list-block">
+                <ul>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title label">头像</div>
+                        <div class="item-input fileupload">
+                          <span class="dx-setavatar" id="J_headimg">
+                            <img src="./img/nohead.png" />
+                          </span>
+
+                          <input type="file" id="J_file" />
+                        </div>
+
+                      </div>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+
+              <div class="list-block">
+                <ul>
+                  <!-- Text inputs -->
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title label">姓名</div>
+                        <div class="item-input">
+                          <input type="text" id="J_realname" value="">
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title label">学生码</div>
+                        <div class="item-input">
+                          <span id="J_parentscode"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <p><a href="javascript:;" id="J_update" class="button button-big button-fill">保存</a></p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="page dx-common-head" id="headimg">
+          <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left back" href="#">
+              <span class="icon icon-left"></span>
+              头像设置
+            </a>
+            <a class="button button-link button-nav pull-right headimg_save J_save" href="#">
+              确定
+            </a>
+          </header>
+          <div class="content">
+            <div class="upimgbox">
+              <img style="width:100%;" src="" id="J_upimg" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <script type='text/javascript' src='js/jquery.js' charset='utf-8'></script>
+      <script>
+        jQuery.noConflict();
+      </script>
+      <script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+      <script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+      <script type='text/javascript' src='js/s.js' charset='utf-8'></script>
+      <script src="http://cdn.ronghub.com/RongIMLib-2.2.2.min.js"></script>
+      <script type='text/javascript' src='js/common.js' charset='utf-8'></script>
+      <script type='text/javascript' src='js/jcrop.js' charset='utf-8'></script>
+      <script type='text/javascript' src='js/info.js?v=1' charset='utf-8'></script>
+
+    </body>
+</html>

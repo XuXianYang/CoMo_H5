@@ -1,0 +1,28 @@
+.talk-content{ padding: 1rem 0.75rem;  overflow-y:auto;}
+.talk-content .talkitem{ margin-bottom: 1rem;}
+.talk-content .talkitem .headicon{width: 2.5rem; height:2.5rem; float:left;}
+.talk-content .talkitem .headicon img{width: 2.5rem; height:2.5rem;}
+.talk-content .talkitem .talkinfo{ margin-left: 3rem;}
+.talk-content .talkitem .talkname{font-size: 0.6rem; margin-bottom: 0.3rem;display: block;color:#999;vertical-align: top;line-height: 1rem;}
+.talk-content .talkitem .talkout{display: block;margin-right: 1rem;}
+.talk-content .talkitem .talkmessage{background: #fff; border-radius: 6px;
+  border:1px solid #ddd;word-break:break-all;word-wrap:break-word;
+  padding:0.5rem; font-size: 0.75rem; line-height: 1rem; float:left;}
+.talkitem .face{width: 32px; height: 32px; background-size: 32px auto; float:none; display: inline-block;
+  margin:0; vertical-align:middle;
+}
+
+
+.dx-talk-bottom{position: absolute; background: #eee;bottom:0; left:0; right:0;border-top: 1px solid #ccc; padding: 0.5rem;}
+.dx-talk-bottom .dx-talksimple{display: flex; height: 1.8rem; margin-bottom: 0.5rem;}
+.dx-talksimple .icon-emoji{font-size: 1.2rem; margin-right: 1rem;}
+.dx-talksimple .txt{ width: 100%; font-size: 0.7rem;resize:none; border:1px solid #fff; height: 1.8rem;padding:0.3rem;}
+.dx-talksimple .talksendbtn{display: block; width: 3rem; margin-left:0.5rem; text-align: center; margin-top: 0.2rem; height: 1.4rem; line-height: 1.4rem;}
+
+.talk-content .talkitemme .headicon{float:right;}
+.talk-content .talkitemme .talkinfo{ margin-right: 3rem; margin-left: 0;}
+.talk-content .talkitemme .talkout{margin-left:1rem; margin-right:0;}
+.talk-content .talkitemme .talkmessage{ background: #18cd6d; float:right; color:#fff;}
+.talk-content .talkitemme .talkname{text-align: right;}
+
+.talktips{padding: 10px 0; color:#999; text-align: center;  font-size:0.65rem;}

@@ -1,0 +1,92 @@
+.dx-overlay{top:0; left:0;right:0;bottom:0; z-index: 9; position: absolute;background: rgba(0, 0, 0, 0.4);}
+.fn-hide{display: none;}
+.orange{color:#f60;}
+.no-network{color:#999; text-align: center; padding-top: 240px; background:url(../img/no_network.png) center 105px no-repeat; background-size:175px 125px;}
+.no-network .retry{width: 6rem; margin: 1rem auto;}
+.no-content{text-align: center; color:#999; font-size: 0.7rem; padding: 0.5rem 0;}
+.dx-no-content{
+  text-align: center; color:#999; font-size: 0.7rem;
+  background: url(../img/no-content.png) center 2rem no-repeat; padding-top: 9rem; background-size: 8rem 6.5rem;
+}
+.dx-bottom-icon{width: 1.2rem; height: 1.2rem;}
+.dx-bottom-icon.icon-01{background: url(../img/bottom-01.png) left center no-repeat; background-size: 3rem 1.2rem;}
+.active .dx-bottom-icon.icon-01{background-position: right center;}
+.dx-bottom-icon.icon-02{background: url(../img/bottom-02.png) left center no-repeat; background-size: 3rem 1.2rem;}
+.active .dx-bottom-icon.icon-02{background-position: right center;}
+.dx-bottom-icon.icon-03{background: url(../img/bottom-03.png) left center no-repeat; background-size: 3rem 1.2rem;}
+.active .dx-bottom-icon.icon-03{background-position: right center;}
+.dx-bottom-icon.icon-04{background: url(../img/bottom-04.png) left center no-repeat; background-size: 3rem 1.2rem;}
+.active .dx-bottom-icon.icon-04{background-position: right center;}
+
+
+.dx-common-head .bar{background: #fff;}
+.dx-common-head .bar .button-link{color:#333;}
+
+.dx-post{padding: 1rem 0.75rem;}
+.dx-post .post-title{font-size: 1.2rem; margin-bottom: 0.75rem;}
+.dx-post .post-info{color:#999; font-size: 0.65rem; margin-bottom: .75rem;}
+.dx-post .post-info .divide{padding: 0.5rem;}
+
+.dx-bar{background: #fff;}
+.bar-tab .tab-item.active, .bar-tab .tab-item:active{color:#f88f33;}
+
+.tab-item-safe{position: relative;}
+.nav-safe{width: 3rem; height:3rem;
+    background: url(../img/nav-safe.png) center top no-repeat;
+    background-size: 3rem 3rem; position: absolute; display: block;
+    left:50%; margin-left: -1.5rem; top:-0.89rem;z-index: 20;
+  }
+.safeupbox{ position: absolute; left:50%; margin-left: -150px; border-radius: 0.5rem 0.5rem 0.1rem 0.1rem;
+width: 300px; bottom:3rem; background: #fff; z-index: 20;}
+.safe-home{height: 10rem; background: #46ab0f; position: relative; border-radius: 0.5rem 0.5rem 0 0;}
+.safe-home .close-popup{font-size: 0.8rem; color:#3d4145;
+display: block; position: absolute; top:0.7rem; right:1rem; font-weight: bold}
+.safe-home .safe-home-title{font-size: 0.8rem; color:#fff;
+    display: block; position: absolute; top:0.7rem; left:0.7rem;}
+.safe-home .safe-home-btn{width: 7rem;height: 7rem; background: url(../img/safe-home-btn.png) no-repeat;
+background-size:7rem 7rem; position: absolute; left:50%; margin-left: -3.5rem; top:2rem;}
+.safe-home .sefe-setting{padding-right: 1.2rem; line-height: 1rem; font-size: 0.6rem; color:#a1f077; height:1rem; display: block;position: absolute;right:0.7rem; top:0.7rem;
+  background: url(../img/safe-setting.png) right center no-repeat; background-size: 1rem 1rem;
+}
+.safe-danger{
+  padding: 1rem 0.75rem;background: #fff;
+}
+.safe-danger .safecontent{border:1px solid #ccc; text-align: left;font-size: 0.7rem;padding: 0.3rem;background: #ecf0f2; resize: none; width:100%; height: 3rem;}
+.safe-danger .button.button-fill.button-big{height: 2rem; line-height: 2rem;}
+.safebtn-box{ margin-bottom:1rem;}
+.safeupbox .safe-up-btn{background: url(../img/nav-safe-up.png) no-repeat; background-size: 5rem 3rem;
+width: 5rem; height: 3rem; bottom:-2.35rem; left:50%; margin-left: -2.5rem; z-index: 20;display: block; position: absolute;}
+
+.safe-danger-top{ padding: 0 0.5rem;}
+.safe-danger-top .button-link.cancel-btn{margin-left: 0;}
+.safe-danger-top .button-link.complete-btn{ color:#0894ec; margin-right: 0;}
+.safe-danger-area{padding: 1rem; font-size: 0.7rem; width: 100%; resize: none; height: 5rem;
+  border:none;
+}
+
+
+
+.safe-tab{padding: 0.5rem 2rem 0.2rem;}
+.safe-tabitem{display: table-cell;width: 1%; text-align: center; }
+.safe-tabitem span{border-bottom:2px solid #fff; display:inline-block; font-size: 0.8rem; line-height: 1.3rem;}
+.safe-tabitem.active span{color:#f60; border-bottom:2px solid #f60;}
+
+.has_new_message{
+    color: red;
+    float: right;
+    position: absolute;
+    display: none;
+    top: -48px;
+    font-size: 54px;
+    left: 46px;
+}
+
+.has_new_group_message{
+    color: red;
+    float: right;
+    position: absolute;
+    display: none;
+    top: -56px;
+    font-size: 64px;
+    left: 49px;
+}

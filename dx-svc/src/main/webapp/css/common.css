@@ -1,0 +1,96 @@
+
+.ld-paging {
+    list-style: none;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.ld-paging .ld-icon::before {
+    vertical-align: inherit;
+}
+
+.ld-paging .ld-paging-item {
+    border: 1px solid #DCDCDC;
+    display: inline-block;
+    border-radius: 2px;
+    background-color: white;
+    margin-right: 10px;
+    line-height: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.ld-paging .ld-paging-item:hover {
+    background-color: #fdfaed;
+}
+
+.ld-paging .ld-paging-item a {
+    color: #999999;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 1px 10px;
+}
+
+.ld-paging .ld-paging-item-current {
+    background-color: #FD8238;
+    border-color: #FD8238;
+}
+
+.ld-paging .ld-paging-item-current:hover {
+    background-color: #FD8238;
+}
+
+.ld-paging .ld-paging-item-current a {
+    cursor: default;
+    color: white;
+}
+
+.ld-paging .ld-paging-item-next {
+    margin-right: 0px;
+}
+
+.ld-paging .ld-paging-item-last a, .ld-paging .ld-paging-item-next a {
+    font-size: 8px;
+    padding: 0 15px;
+}
+
+.ld-paging .ld-paging-item-disabled {
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+}
+
+.ld-paging .ld-paging-item-disabled:hover {
+    background-color: #F3F3F3;
+}
+
+.ld-paging .ld-paging-item-disabled a {
+    cursor: default;
+    color: #999999;
+}
+
+.ld-paging .ld-paging-more {
+    color: #FD8238;
+    margin-right: 10px;
+    font-size: 14px;
+    border: none;
+}
+
+.ld-paging .ld-paging-more:hover {
+    background: none;
+}
+
+.ld-paging .ld-paging-item, .ld-paging .ld-paging-item a {
+    *display: inline;
+    *zoom: 1;
+}
+
+.ld-icon.ld-icon-chevron-left:before {
+    content: "<";
+    font-size: 15px;
+}
+
+.ld-icon.ld-icon-chevron-right:before {
+    content: ">";
+    font-size: 15px;
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<jmxConfigurator />
+	<substitutionProperty name="LAF_LOG_HOME" value="./logs" />
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="UTF-8">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss SSS} %highlight([%p]) %c{30} - %m%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="reporterAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LAF_LOG_HOME}/dx-svc.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+
+		<encoder charset="UTF-8">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss SSS} [%-3p] %c{3} - %m%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="warnAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LAF_LOG_HOME}/dx-svc.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<encoder charset="UTF-8">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss SSS} [%-3p] %c{3} - %m%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="org.springframework">
+		<level value="WARN" />
+	</logger>
+	<logger name="org.apache.http">
+		<level value="WARN" />
+	</logger>
+	<logger name="com.sun.jersey">
+		<level value="WARN" />
+	</logger>
+
+	<root>
+		<level value="WARN" />
+		<appender-ref ref="console" />
+		<appender-ref ref="reporterAppender" />
+	</root>
+</configuration>
+

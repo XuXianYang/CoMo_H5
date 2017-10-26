@@ -1,0 +1,16 @@
+.dx-top-panel {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+}
+
+.dx-top-panel .title {
+  height: 55px;
+  box-sizing: border-box;
+}
+
+.dx-top-panel .title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 0 14px 32px;
+  line-height: 26px;
+}

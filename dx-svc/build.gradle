@@ -1,0 +1,227 @@
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply from: 'gretty.plugin.gradle'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+// 指定编译成哪个版本的class
+sourceCompatibility='1.6'
+targetCompatibility='1.6'
+
+repositories {
+    def repos = new ArrayList();
+    File file = file("gradle.properties");
+    BufferedReader reader = null;
+    try {
+        System.out.println("以行为单位读取文件内容，一次读一整行：");
+        reader = new BufferedReader(new FileReader(file));
+        String tempString = null;
+        int line = 1;
+        // 一次读入一行，直到读入null为文件结束
+        while ((tempString = reader.readLine()) != null) {
+            // 显示行号
+            System.out.println("line " + line + ": " + tempString);
+            line++;
+            int index = tempString.indexOf("=");
+            if (0 >= index) {
+                continue;
+            }
+            String key = tempString.substring(0, index);
+            if (key.startsWith("repository.")) {
+                repos.add(tempString.substring(index + 1));
+            }
+        }
+        reader.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if (reader != null) {
+            try {
+                reader.close();
+            } catch (IOException e1) {
+            }
+        }
+    }
+    repos.each {
+        println it
+        def repoUrl = new URL(it)
+        maven { url repoUrl }
+    }
+}
+idea {
+    module {
+        jdkName = '1.8'
+    }
+}
+
+def profile = System.getProperty("profile") ?: "dev"
+
+sourceSets {
+    main {
+        resources.srcDirs += 'src/main/resources'
+        resources.srcDirs += 'src/main/webapp'
+        resources.srcDirs += "src/main/filters/$profile"
+    }
+    test {
+        resources.srcDirs += 'src/test/resources'
+        resources.srcDirs += 'src/test/webapp'
+    }
+}
+
+
+configurations.all {
+    it.exclude group: 'log4j', module: 'log4j'
+    it.exclude group: 'commons-logging', module: 'commons-logging'
+    it.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    it.exclude group: 'org.apache.activemq', module: 'activemq-all'
+    it.exclude group: 'com.google.collections', module: 'google-collections'
+    it.exclude group: 'org.glassfish.hk2.external', module: 'bean-validator'
+//    it.exclude group: 'org.sonatype.sisu.inject', module: 'cglib'
+//    it.exclude group: 'cglib', module: 'cglib-nodep'
+//    it.exclude group: 'org.ow2.asm', module: 'asm-debug-all'
+}
+
+dependencies {
+    def externJar = fileTree(dir: 'externLib/', include: '*.jar')
+    compile externJar
+
+    // jersey
+    def jersey_version = "2.22.2"
+    compile([
+            "javax.ws.rs:javax.ws.rs-api:2.0.1",
+            "javax.servlet:javax.servlet-api:3.0.1",
+            "org.glassfish.jersey.containers:jersey-container-servlet:$jersey_version",
+            "org.glassfish.jersey.core:jersey-client:$jersey_version",
+            "org.glassfish.jersey.ext:jersey-spring3:$jersey_version",
+            "org.glassfish.jersey.media:jersey-media-multipart:$jersey_version",
+            "org.glassfish.jersey.ext:jersey-bean-validation:$jersey_version"])
+    testCompile(["org.glassfish.jersey.test-framework:jersey-test-framework-core:$jersey_version",
+                 "org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:$jersey_version"])
+    // api doc
+    compile "io.swagger:swagger-jersey2-jaxrs:1.5.8"
+
+    // spring
+    def spring_version = "4.2.6.RELEASE"
+    compile(["org.springframework:spring-core:$spring_version",
+              "org.springframework:spring-expression:$spring_version",
+              "org.springframework:spring-beans:$spring_version",
+              "org.springframework:spring-aop:$spring_version",
+              "org.springframework:spring-context:$spring_version",
+              "org.springframework:spring-tx:$spring_version",
+              "org.springframework:spring-orm:$spring_version",
+              "org.springframework:spring-web:$spring_version",
+              "org.springframework:spring-jdbc:$spring_version",
+              "org.springframework:spring-webmvc:$spring_version",
+              "org.springframework:spring-context-support:$spring_version",
+              "org.springframework:spring-test:$spring_version"])
+    compile "net.sf.ehcache:ehcache:2.10.2"
+
+    // aop
+	compile(["aopalliance:aopalliance:1.0",
+	        "org.aspectj:aspectjweaver:1.8.5"
+             ])
+
+    // velocity
+    def velocity_version = "1.7";
+    def velocity_tools_version = "2.0"
+    compile("org.apache.velocity:velocity:$velocity_version")
+    compile("org.apache.velocity:velocity-tools:$velocity_tools_version") {
+        exclude(group: 'org.apache.struts', module: 'struts-core')
+        exclude(group: 'org.apache.struts', module: 'struts-taglib')
+        exclude(group: 'org.apache.struts', module: 'struts-tiles')
+    }
+	// db
+    compile 'org.mybatis:mybatis:3.2.8'
+    compile 'org.mybatis:mybatis-spring:1.2.2'
+    compile "mysql:mysql-connector-java:5.1.34"
+    compile "com.github.pagehelper:pagehelper:4.1.4"
+
+	// log
+	compile(["org.slf4j:slf4j-api:1.6.5",
+                "org.slf4j:jcl-over-slf4j:1.6.5",
+                "org.slf4j:log4j-over-slf4j:1.6.5",
+                "ch.qos.logback:logback-classic:1.1.3",
+                "ch.qos.logback:logback-core:1.1.3"])
+
+    // json
+	compile "com.google.code.gson:gson:2.6.2"
+
+	// utils
+	compile(["commons-lang:commons-lang:2.4",
+              "commons-io:commons-io:2.0.1",
+              "commons-codec:commons-codec:1.5",
+              "commons-dbcp:commons-dbcp:1.4",
+              "commons-pool:commons-pool:1.5.6"])
+	compile "com.google.guava:guava:18.0"
+
+    compile "redis.clients:jedis:2.5.1"
+    compile "io.dropwizard.metrics:metrics-core:3.1.0"
+    compile "io.dropwizard.metrics:metrics-ganglia:3.1.0"
+    // test
+	compile "org.testng:testng:6.5.1"
+	compile "org.mockito:mockito-all:1.8.5"
+
+    compile 'com.qiniu:qiniu-java-sdk:7.0.9'
+    // 图片处理
+    compile 'net.coobird:thumbnailator:0.4.8'
+
+    // log
+    compile(["org.apache.poi:poi:3.10-FINAL",
+             "org.apache.poi:poi-ooxml:3.10-FINAL",
+             "org.apache.poi:poi-ooxml-schemas:3.10-FINAL",
+             "xmlbeans:xmlbeans:2.3.0"],
+            "dom4j:dom4j:1.6.1")
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+// 暂时不拆分打包，不使用tomcatctl控制
+//war {
+//    rootSpec.exclude("dx-svc.properties")
+//    rootSpec.exclude("dx-svc-env.properties")
+//    rootSpec.exclude("logback.xml")
+//}
+//
+//task zipResource(type: Zip) {
+//    from "src/main/resources/logback.xml"
+//    from "src/main/resources/dx-svc.properties"
+//    from "src/main/filters/$profile/dx-svc-env.properties"
+//
+//    baseName = 'dx-svc-resources' //archivePath = laf-resource/build/distributions
+//    destinationDir = project.buildDir
+//}
+
+task copyDependencies(type: Copy) {
+    from configurations.runtime
+    into 'dependencies'
+}
+
+task copyTestOutputs(dependsOn: 'testClasses') << {
+    copy {
+        from project.buildDir.getPath() + '/classes/test'
+        into project.buildDir.getPath() + '/classes/main'
+    }
+    copy {
+        from project.buildDir.getPath() + '/resources/test'
+        into project.buildDir.getPath() + '/resources/main'
+    }
+}
+
+task testWar(type: War, dependsOn: 'copyTestOutputs') {
+    outputs.upToDateWhen { false }
+}
+
+gretty {
+    servletContainer = "tomcat7"
+    managedClassReload = true
+    httpPort = 8081
+    debugSuspend = false
+}
+
+task prepareAppRun(dependsOn: 'classes') << {
+    copy {
+        from project.buildDir.getPath() + '/resources/main'
+        into project.buildDir.getPath() + '/classes/main'
+        include('*.xml', '*.properties')
+    }
+}

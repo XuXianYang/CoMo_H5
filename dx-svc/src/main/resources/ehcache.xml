@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+         updateCheck="false">
+    <!--<diskStore path="java.io.tmpdir" />-->
+    <defaultCache eternal="false"
+                  maxElementsInMemory="1000"
+                  overflowToDisk="false"
+                  diskPersistent="false"
+                  timeToIdleSeconds="300"
+                  timeToLiveSeconds="300"
+                  memoryStoreEvictionPolicy="LFU" />
+
+    <cache name="courseCache"
+           eternal="false"
+           maxElementsInMemory="100"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           memoryStoreEvictionPolicy="LFU" />
+
+    <cache name="permissionCache"
+           eternal="false"
+           maxElementsInMemory="200"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="900"
+           timeToLiveSeconds="900"
+           memoryStoreEvictionPolicy="LFU" />
+</ehcache>

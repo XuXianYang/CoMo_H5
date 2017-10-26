@@ -1,0 +1,75 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "考试成绩列表 － 我的发布")
+#set($styles = ["teacher/my-publishment.css", "teacher/my-publishment-score.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js","teacher/my-publishment.js", "teacher/score.js"])
+
+<div class="dx-conwrap">
+    #set($toptab="score")
+    #parse("teacher/module/toptab.vm")
+    <div class="dx-subtab">
+        <ul>
+            <li>
+                <a href="${contextPath}/web/teacher/score/create">发布成绩</a>
+            </li>
+            <li class="active">
+                <a href="#">已发布</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dx-top-panel">
+		<div class="class-list btn-selector-group"
+			data-value="${currentClass.id}"
+			data-type="radio">
+			#foreach($theClass in $joinedClasses)
+				<a href="${contextPath}/web/teacher/score/list?classId=$!theClass.id" class="btn btn-selector #if($!currentClass.id == $!theClass.id) selected #end"
+					data-value="${theClass.id}">${theClass.name}</a>
+			#end
+		</div>
+	</div>
+
+    <table class="table table-border table-hover">
+      <thead>
+        <tr>
+          <th>发布时间</th>
+          <th>内容</th>
+          <!--
+          <th>发布给</th>
+          -->
+          <th>科目</th>
+          <th>类型</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      #foreach($courseQuiz in $allCourseQuizes)
+        <tr>
+          <td>$!{DisplayUtils.formatDateTime($!{courseQuiz.quiz.endTime})}</td>
+          <td><a href="${contextPath}/web/teacher/score/detail?quizId=$!{courseQuiz.quiz.id}&classId=$!{currentClass.id}">$!{courseQuiz.quiz.name}</a></td>
+          <!--
+          <td>$!{currentClass.name}</td>
+          -->
+          <td>$!courseQuiz.course.name</td>
+          <td>
+            ##1-期末, 2-期中, 3-月考
+            #if($!{courseQuiz.quiz.category} == 1)
+              期末考试
+            #elseif($!{courseQuiz.quiz.category} == 2)
+              期中考试
+            #else
+              月考
+            #end
+          </td>
+          <td>
+            <a href="${contextPath}/web/teacher/score/edit?classId=$!{currentClass.id}&quizId=$!{courseQuiz.quiz.id}">编辑</a>
+          </td>
+        </tr>
+      #end
+      </tbody>
+    </table>
+    <!--
+    <div class="pager pager-bottom">
+      1/100页&nbsp;<a href="javascript:void(0)" class="prev-page">上一页</a>&nbsp;&nbsp;跳转到&nbsp;<input class="jump-page" type="number" min="1" max="100">&nbsp;页&nbsp;&nbsp;<a href="javascript:void(0)" class="next-page">下一页</a>
+    </div>
+    -->
+</div>

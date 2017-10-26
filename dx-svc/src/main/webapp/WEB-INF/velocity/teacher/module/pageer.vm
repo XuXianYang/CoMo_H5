@@ -1,0 +1,11 @@
+<div class="pagination-area">
+    #if(!$pagingInfo.isFirstPage)
+        <a href="$!{pageUrl}pageNum=$!{pagingInfo.firstPage}">首页</a>
+        <a href="$!{pageUrl}pageNum=$!{pagingInfo.prePage}">上一页</a>
+    #end
+    <span>$!{pagingInfo.startRow}-$!{pagingInfo.endRow} 条，共$!{pagingInfo.total}条</span>
+    #if(!$pagingInfo.isLastPage)
+    <a href="$!{pageUrl}pageNum=$!{pagingInfo.nextPage}">下一页</a>
+    <a href="$!{pageUrl}pageNum=$!{pagingInfo.lastPage}">尾页</a>
+    #end
+</div>

@@ -1,0 +1,20 @@
+#set($layout = "layout/default_layout.vm")
+#set($pageTitle = "登录")
+#set($styles = ["css/login.css"])
+#set($scripts = ["js/login.js"])
+<div class="main-wide-wrap">
+    <form class="ui form">
+        <div class="field required">
+            <label>用户名</label>
+            <input id="username" name="username" type="text" >
+        </div>
+        <div class="field required">
+            <label>密码</label>
+            <input id="password" name="password" type="text" >
+        </div>
+        <div class="ui error message">
+            <p id="errorMsg"></p>
+        </div>
+        <a id="submit" class="ui button">登录</a>
+    </form>
+</div>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>$pageTitle</title>
+    <link href='${contextPath}/css/hui/H-ui.reset.css' rel='stylesheet' type='text/css'/>
+    <link href='${contextPath}/css/hui/H-ui.min.css' rel='stylesheet' type='text/css'>
+    <link href="${contextPath}/css/hui/iconfont/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="${contextPath}/lib/jQuery-File-Upload/css/jquery.fileupload.css" rel="stylesheet" type="text/css" />
+    <link href='${contextPath}/css/base.css' rel='stylesheet' type='text/css'>
+    #foreach($style in $libstyles)
+    	<link href='${contextPath}/lib/$style' rel='stylesheet' type='text/css'>
+    #end
+    #foreach($style in $styles)
+    	<link href='${contextPath}/css/$style' rel='stylesheet' type='text/css'>
+    #end
+</head>
+<body>
+#parse("global.vm")
+<div class="header">
+    <div class="header-wrap cl">
+        <div class="logo"></div>
+        <div class="header-date">
+            <div>今天是：</div>
+            <div>$!{currentDate}</div>
+            <div class="week">$!{currentWeekDay}</div>
+        </div>
+        <div class="header-user">
+        	#if ($!{currentUser.name})
+        		<span>$!currentSchool.name欢迎您:</span>
+            	<span>$!{currentUser.name}</span>
+            #else
+            	<span>$!currentSchool.name欢迎您!</span>
+            #end
+
+        </div>
+        <div class="header-opt">
+            <a href="${contextPath}${servletPath}/teacher/setting">设置</a> | <a href="${contextPath}${servletPath}/teacher/logout">退出</a>
+        </div>
+    </div>
+</div>
+<div class="dx-slide">
+    <ul class="left-menu">
+        <li page-name="my-publishment">
+            <a href="${contextPath}${servletPath}/teacher/homework"><i class="Hui-iconfont Hui-iconfont-fabu"></i>我的发布</a>
+        </li>
+        <li page-name="my-class">
+            <a href="${contextPath}/web/teacher"><i class="Hui-iconfont Hui-iconfont-usergroup2"></i>我的班级</a>
+        </li>
+        <li page-name="my-ling">
+            <a href="${contextPath}${servletPath}/teacher/ling"><i class="Hui-iconfont Hui-iconfont-msg"></i>考试铃</a>
+        </li>
+        <li page-name="my-report">
+            <a href="${contextPath}${servletPath}/teacher/report"><i class="Hui-iconfont Hui-iconfont-xiaoxi1"></i>小报告#if($!{hasNewSneakingMessagesResult.hasNewSneakingMessages}) <span class="has_new_report">.</span> #end</a>
+        </li>
+        <!--
+        <li page-name="my-safe">
+            <a href="${contextPath}${servletPath}/teacher/safe"><i class="Hui-iconfont Hui-iconfont-like"></i>安全助手</a>
+        </li>
+        -->
+        <li page-name="my-group">
+            <a href="${contextPath}${servletPath}/teacher/group"><i class="Hui-iconfont Hui-iconfont-comment"></i>班群<span class="has_new_message">.</span></a>
+        </li>
+
+    </ul>
+</div>
+
+<div class="dx-content">
+    <div class="dx-con">
+        $screen_content
+    </div>
+</div>
+<script src='${contextPath}/lib/jquery/jquery-1.8.0.min.js' type='text/javascript'></script>
+<script src='${contextPath}/lib/hui/H-ui.js' type='text/javascript'></script>
+<script src='${contextPath}/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js' type='text/javascript'></script>
+<script src='${contextPath}/lib/bootstrap-modal/2.2.4/bootstrap-modal.js' type='text/javascript'></script>
+<script src="${contextPath}/lib/jQuery-File-Upload/js/vendor/jquery.ui.widget.js" type='text/javascript'></script>
+<script src="${contextPath}/lib/jQuery-File-Upload/js/jquery.iframe-transport.js" type='text/javascript'></script>
+<script src="${contextPath}/lib/jQuery-File-Upload/js/jquery.fileupload.js" type='text/javascript'></script>
+<script src="http://cdn.ronghub.com/RongIMLib-2.2.2.min.js"></script>
+<script src='${contextPath}/js/common.js' type='text/javascript'></script>
+<script src='${contextPath}/lib/layer/layer.js' type='text/javascript'></script>
+<script src='${contextPath}/js/teacher/json2.js' type='text/javascript'></script>
+<script src='${contextPath}/js/teacher/common.js' type='text/javascript'></script>
+#foreach($script in $remotescripts)
+<script src='$script' type='text/javascript'></script>
+#end
+#foreach($script in $libscripts)
+	<script src='${contextPath}/lib/$script' type='text/javascript'></script>
+#end
+#foreach($script in $scripts)
+	<script src='${contextPath}/js/$script' type='text/javascript'></script>
+#end
+
+<div class="dx-loading" style="display:none;">
+	<div class="mask"></div>
+	<div class="content">
+  	<img class="loading-icon" src="${contextPath}/img/dx-loading.gif"></img>
+	</div>
+</div>
+<div id="message-box" class="modal hide fade message-box" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<h4 id="message-box-title"></h4><a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
+	</div>
+	<div class="modal-body">
+		<div>
+			<i class="icon-success icon Hui-iconfont">&#xe676;</i>
+			<i class="icon-error icon Hui-iconfont">&#xe706;</i>
+			<div class="message">
+				<span id="message-content" class="message-content">添加成功</span>
+				<p id="message-content-after">要查看过去已发布的内容请点击<a>已发布</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

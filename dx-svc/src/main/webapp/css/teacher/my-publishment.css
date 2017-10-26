@@ -1,0 +1,10 @@
+.dx-col{padding: 8px 0;}
+.dx-col .f-lab{ width: 130px; float: left;min-height: 10px;
+line-height: 28px; font-size: 14px; text-align: right; margin-right: 10px;}
+.dx-col .f-con{float:left; width: 500px;}
+.dx-col .dx-check{ margin-right: 10px; line-height: 28px;}
+.dx-col .dx-check input{ margin-right: 3px;}
+.dx-col .dx-select{line-height: 28px;}
+.dropzone {border: 2px dashed #0087F7; border-radius: 5px; background: white;}
+.dropzone .dz-message { font-weight: 400; }
+.dropzone .dz-message .note { font-size: 0.8em; font-weight: 200; display: block; margin-top: 1.4rem; }

@@ -1,0 +1,33 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "我的学生 － 我的班级")
+#set($styles = ["teacher/class.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js", "teacher/class/common.js"])
+#set($pageTab = "class-information")
+
+<div class="dx-conwrap">
+    #parse('teacher/class/common-top.vm')
+    <div class="class-info-panel">
+      <p>
+        所属学校：${currentSchool.name}
+      </p>
+      <p>
+        所属学年：${currentClass.enrolYear}年
+      </p>
+      <p>
+        班级编码：${currentClass.code}
+      </p>
+      #if($!{masterTeacher.name})
+		  <p>
+	        班主任老师：$!{masterTeacher.name}
+	      </p>
+      #end
+      <!--
+      <p>
+        <button class="btn disabled radius" disabled>解散班级</button>
+      </p>
+      <p>
+        <button class="btn radius btn-disband-class">解散班级</button>
+      </p>
+       -->
+    </div>
+</div>

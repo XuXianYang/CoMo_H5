@@ -1,0 +1,30 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "课件列表 － 我的发布")
+#set($styles = ["teacher/my-publishment.css", "teacher/my-publishment-courseware.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js","teacher/my-publishment.js", "teacher/courseware.js"])
+
+<div class="dx-conwrap">
+    <div>
+      <h4>$!{courseware.name}</h4>
+      <!-- 发件人就是自己。。。。
+      <p>发件人：$!{courseware}</p>
+      -->
+      <p>发布时间：$!{DisplayUtils.formatDateTime($$courseware.createdAt)}</p>
+      <p>布置给：$!{clazz.name}</p>
+      <p>类型：
+      ##材料类型. 1->预习向导， 2->课堂笔记，3->课件
+      #if($!{courseware.type} == 1)
+        预习向导
+      #elseif($!{courseware.type} == 2)
+        课堂笔记
+      #else
+        课件
+      #end</p>
+      <hr/>
+      <p>$!{courseware.description}</p>
+      #if($!{courseware.attachment})
+        <p>附件：<a href="$!{courseware.attachment.url}">$!{courseware.attachment.name}</a></p>
+      #end
+      <p><a href="${contextPath}/web/teacher/courseware/list" class="btn btn-link">返回课件列表</a></p>
+    </div>
+</div>

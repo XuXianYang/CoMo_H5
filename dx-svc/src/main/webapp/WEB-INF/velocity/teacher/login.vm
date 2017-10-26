@@ -1,0 +1,35 @@
+#set($layout = "layout/login_layout.vm")
+#set($pageTitle = "登录")
+#set($styles = [])
+#set($scripts = ["loginreg.js"])
+<div class="lcontent">
+    <div class="contentwrap">
+        <form>
+            <div class="loginform">
+                <div class="col">
+                    <span class="Hui-iconfont Hui-iconfont-user2 icon"></span>
+                    <input type="text" maxlength="50" id="J_username" class="txt" placeholder="请输入帐号" />
+                </div>
+                <div class="errormsg">
+
+                </div>
+                <div class="col">
+                    <span class="Hui-iconfont Hui-iconfont-suoding icon"></span>
+                    <input type="password" maxlength="50" id="J_password" class="txt" placeholder="请输入密码" />
+                </div>
+                <div class="errormsg">
+
+                </div>
+
+                <div class="gotobox cl">
+                    <a href="findpwd" class="findpwd">找回密码</a>
+                    <a href="register" class="gotoreg">立即注册</a>
+                </div>
+                <div>
+                    <a href="javascript:;" id="J_submit" class="logbtn">登录</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

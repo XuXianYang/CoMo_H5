@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.user.dao.ParentChildDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.user.dto.ParentChildDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_user_id" property="parentUserId" jdbcType="BIGINT" />
+    <result column="child_user_id" property="childUserId" jdbcType="BIGINT" />
+    <result column="relation" property="relation" jdbcType="INTEGER" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parent_user_id, child_user_id, relation, created_by, updated_by, created_at, 
+    updated_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from parent_child
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from parent_child
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.user.dto.ParentChildDto" useGeneratedKeys="true" keyProperty="id" >
+    insert into parent_child (parent_user_id, child_user_id,
+      relation, created_by, created_at)
+    values (#{parentUserId,jdbcType=BIGINT}, #{childUserId,jdbcType=BIGINT},
+      #{relation,jdbcType=INTEGER}, #{createdBy,jdbcType=BIGINT}, now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.user.dto.ParentChildDto" >
+    insert into parent_child
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentUserId != null" >
+        parent_user_id,
+      </if>
+      <if test="childUserId != null" >
+        child_user_id,
+      </if>
+      <if test="relation != null" >
+        relation,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentUserId != null" >
+        #{parentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="childUserId != null" >
+        #{childUserId,jdbcType=BIGINT},
+      </if>
+      <if test="relation != null" >
+        #{relation,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.user.dto.ParentChildDto" >
+    update parent_child
+    <set >
+      <if test="parentUserId != null" >
+        parent_user_id = #{parentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="childUserId != null" >
+        child_user_id = #{childUserId,jdbcType=BIGINT},
+      </if>
+      <if test="relation != null" >
+        relation = #{relation,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.user.dto.ParentChildDto" >
+    update parent_child
+    set parent_user_id = #{parentUserId,jdbcType=BIGINT},
+      child_user_id = #{childUserId,jdbcType=BIGINT},
+      relation = #{relation,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="getChild" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from parent_child
+        where parent_user_id = #{parentUserId} and child_user_id = #{childUserId}
+    </select>
+    <select id="getChildren" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from parent_child
+        where parent_user_id = #{parentUserId}
+    </select>
+    <select id="getParents" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from parent_child
+        where child_user_id = #{childUserId}
+    </select>
+
+    <select id="getParentsByChildUserIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from parent_child
+        where child_user_id in
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

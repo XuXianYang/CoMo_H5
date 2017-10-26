@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.user.dao.TeacherDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.user.dto.TeacherDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="school_id" property="schoolId" jdbcType="BIGINT" />
+    <result column="work_no" property="workNo" jdbcType="VARCHAR" />
+    <result column="view_sneaking_msg_at" property="viewSneakingMsgAt" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dianxian.user.dto.TeacherDto" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, school_id, work_no, view_sneaking_msg_at, created_by, updated_by, created_at, updated_at
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from teacher
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from teacher
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.user.dto.TeacherDto" >
+    insert into teacher (user_id, school_id,
+      work_no, created_at, description
+      )
+    values (#{userId,jdbcType=BIGINT}, #{schoolId,jdbcType=BIGINT},
+      #{workNo,jdbcType=VARCHAR}, now(), #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.user.dto.TeacherDto" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="schoolId != null" >
+        school_id,
+      </if>
+      <if test="workNo != null" >
+        work_no,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="schoolId != null" >
+        #{schoolId,jdbcType=BIGINT},
+      </if>
+      <if test="workNo != null" >
+        #{workNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.user.dto.TeacherDto" >
+    update teacher
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="schoolId != null" >
+        school_id = #{schoolId,jdbcType=BIGINT},
+      </if>
+      <if test="workNo != null" >
+        work_no = #{workNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dianxian.user.dto.TeacherDto" >
+    update teacher
+    set user_id = #{userId,jdbcType=BIGINT},
+      school_id = #{schoolId,jdbcType=BIGINT},
+      work_no = #{workNo,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.user.dto.TeacherDto" >
+    update teacher
+    set user_id = #{userId,jdbcType=BIGINT},
+      school_id = #{schoolId,jdbcType=BIGINT},
+      work_no = #{workNo,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="getByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from teacher
+        where user_id = #{userId}
+    </select>
+    <update id="joinSchool" parameterType="com.dianxian.user.dto.TeacherDto" >
+        update teacher
+        set school_id = #{schoolId,jdbcType=BIGINT},
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        updated_at = now()
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getByIds" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from teacher
+        where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getByUserIds" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from teacher
+        where user_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="updateLastViewSneakingMsgTime" parameterType="java.lang.Long" >
+        update teacher
+        set view_sneaking_msg_at = now()
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

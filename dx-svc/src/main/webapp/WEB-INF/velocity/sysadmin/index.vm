@@ -1,0 +1,5 @@
+#set($layout = "layout/sysadmin_layout.vm")
+#set($pageTitle = "系统管理员首页")
+<div class="main-wide-wrap">
+    SysAdmin
+</div>

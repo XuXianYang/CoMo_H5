@@ -1,0 +1,53 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "班群 － 点线")
+#set($styles = ["teacher/my-group.css"])
+#set($scripts = ["teacher/talk/swipe.js","teacher/talk/emoji.js","teacher/rongchart.js"])
+###set($remotescripts = ["http://cdn.ronghub.com/RongIMLib-2.2.2.min.js"])
+<script>
+    window.currentPage = "my-group";
+</script>
+<div class="dx-conwrap">
+
+    <input type="hidden" value="" id="J_imGgroupId">
+    <div class="dx-group cl">
+        <label class="lab">
+            选择聊天群：
+        </label>
+        <div class="classlist">
+            #foreach($item in $grouplist)
+                <span data-id="$!item.id" data-groupid="$!item.imGroupId" class="classitem #if($!item.id==$!selid) sel#end">
+                    <a href="group?selid=$!item.id">$item.name</a>
+                    #if($!item.id==$!selid)
+                        <span class="selicon Hui-iconfont Hui-iconfont-selected"></span>
+                    #end
+                    <span class="has_new_group_message" data-groupid="$!item.imGroupId">.</span>
+                </span>
+            #end
+        </div>
+    </div>
+
+    <div class="talkallbox" style="display: none;">
+        <div class="top"><span class="J_groupname"></span></div>
+        <div class="talk-content content J_message">
+
+        </div>
+
+        <div class="dx-talk-bottom">
+            <div class="dx-talksimple">
+                <span class="Hui-iconfont Hui-iconfont-face2 emojicon" id="emojiBtn"></span>
+                <textarea class="txt" id="textContent"  ></textarea>
+                <a href="javascript:;" class="btn radius btn-warning talksendbtn J_send">发送</a>
+            </div>
+            <div class="swiper-container dx-emoji" style="visibility:hidden;" >
+                <div class="face-main-box" >
+                    <div class="swiper-wrapper">
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

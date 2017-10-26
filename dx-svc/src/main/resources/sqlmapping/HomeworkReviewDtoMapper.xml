@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.school.dao.HomeworkReviewDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.school.dto.HomeworkReviewDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="homework_id" property="homeworkId" jdbcType="BIGINT" />
+    <result column="student_id" property="studentId" jdbcType="BIGINT" />
+    <result column="study_date" property="studyDate" jdbcType="DATE" />
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, homework_id, student_id, study_date, review_time, created_by, updated_by, created_at, 
+    updated_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from homework_review
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from homework_review
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.school.dto.HomeworkReviewDto" useGeneratedKeys="true" keyProperty="id" >
+    insert into homework_review (homework_id, student_id,
+      study_date, review_time, created_by, created_at
+      )
+    values (#{homeworkId,jdbcType=BIGINT}, #{studentId,jdbcType=BIGINT},
+      #{studyDate,jdbcType=DATE}, now(), #{createdBy,jdbcType=BIGINT}, now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.school.dto.HomeworkReviewDto" >
+    insert into homework_review
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="homeworkId != null" >
+        homework_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="studyDate != null" >
+        study_date,
+      </if>
+      <if test="reviewTime != null" >
+        review_time,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="homeworkId != null" >
+        #{homeworkId,jdbcType=BIGINT},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="studyDate != null" >
+        #{studyDate,jdbcType=DATE},
+      </if>
+      <if test="reviewTime != null" >
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.school.dto.HomeworkReviewDto" >
+    update homework_review
+    <set >
+      <if test="homeworkId != null" >
+        homework_id = #{homeworkId,jdbcType=BIGINT},
+      </if>
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="studyDate != null" >
+        study_date = #{studyDate,jdbcType=DATE},
+      </if>
+      <if test="reviewTime != null" >
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.school.dto.HomeworkReviewDto" >
+    update homework_review
+    set homework_id = #{homeworkId,jdbcType=BIGINT},
+      student_id = #{studentId,jdbcType=BIGINT},
+      study_date = #{studyDate,jdbcType=DATE},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="getReviewRecordsOfStudent" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from homework_review
+        where student_id = #{studentId} and study_date = #{studyDate}
+    </select>
+
+    <select id="getReviewRecord" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from homework_review
+        where student_id = #{studentId} and homework_id = #{homeworkId}
+    </select>
+
+    <select id="getReviewRecordsByHomeworkId" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from homework_review
+        where homework_id = #{homeworkId}
+    </select>
+</mapper>

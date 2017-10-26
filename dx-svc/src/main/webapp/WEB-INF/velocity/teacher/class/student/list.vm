@@ -1,0 +1,61 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "我的学生 － 我的班级")
+#set($styles = ["teacher/class.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js", "teacher/class/common.js", "teacher/class/list.js"])
+#set($pageTab = "student-list")
+<div class="dx-conwrap">
+  #parse('teacher/class/common-top.vm')
+
+  <table class="table table-border table-hover student-list">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>家长</th>
+        <th>学生手机</th>
+        <th>进班时间</th>
+        #if ($!canRemoveStudent)
+        <th>操作</th>
+        #end
+      </tr>
+    </thead>
+    <tbody>
+        #foreach($theStudent in $studentsOfClass)
+        <tr>
+            <td>$!{theStudent.realName}</td>
+            <td>
+                #if ($!theStudent.parents && $!theStudent.parents.size() > 0)
+                    #foreach($parent in $theStudent.parents)
+                        #if($parent.relation == 1)
+                            （父）
+                        #else
+                            （母）
+                        #end
+                        $!parent.realName $!parent.mobileNo
+                    #end
+                #else
+                    暂无
+                #end
+            </td>
+            <td>
+                #if ($!theStudent.studentNo)
+                    ${theStudent.studentNo}
+                #else
+                    暂无
+                #end
+            </td>
+            <td>$!{DisplayUtils.formatDate($!{theStudent.joinClassAt})}</td>
+            #if ($!canRemoveStudent)
+                <td><a href="javascript:void(0);" class="btn-remove-student-from-class" data-student-id="$!{theStudent.studentId}" data-class-id="${currentClass.id}">移除</a></td>
+            #end
+        </tr>
+        #end
+    </tbody>
+  </table>
+
+
+      <!--
+  <div class="pager pager-bottom">
+    1/100页&nbsp;<a href="javascript:void(0)" class="prev-page">上一页</a>&nbsp;&nbsp;跳转到&nbsp;<input class="jump-page" type="number" min="0" max="100">&nbsp;页&nbsp;&nbsp;<a href="javascript:void(0)" class="next-page">下一页</a>
+      </div>
+  </div>
+   -->

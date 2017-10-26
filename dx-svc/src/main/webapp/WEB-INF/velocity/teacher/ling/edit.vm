@@ -1,0 +1,116 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "考试铃 － 点线")
+#set($styles = ["teacher/homework.css"])
+#set($scripts = ["laydate/laydate.js","teacher/my-ling.js"])
+<script>
+    window.currentPage = "my-ling";
+</script>
+<div class="dx-conwrap">
+    <div class="dx-toptab">
+        <ul>
+            <li class="active"><a href="${contextPath}${servletPath}/teacher/ling">考试铃</a></li>
+        </ul>
+    </div>
+    <div class="dx-subtab">
+        <ul>
+        	#if($!canCreateQuiz)
+            <li >
+                <a href="${contextPath}${servletPath}/teacher/ling/do">发布考试</a>
+            </li>
+            #end
+            <li >
+                <a href="${contextPath}${servletPath}/teacher/ling">已发布</a>
+            </li>
+        </ul>
+    </div>
+    #if($!canCreateQuiz)
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>考试名称：</label>
+            <div class="f-con">
+                <input type="text" class="input-text" id="J_name" />
+                <div class="errormsg"></div>
+            </div>
+        </div>
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>选择课程：</label>
+            <div class="f-con">
+                <select id="J_course">
+                    #foreach($item in $courses)
+                    <option value="$item.id">$item.name</option>
+                    #end
+                </select>
+                <div class="errormsg"></div>
+            </div>
+        </div>
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>入学年份：</label>
+            <div class="f-con">
+                <select id="J_year">
+                    #foreach($item in $years)
+                        <option value="$item">$item</option>
+                    #end
+                </select>
+            </div>
+        </div>
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>考试时间：
+            </label>
+            <div class="f-con">
+                <input type="text" id="J_start" readonly   class="input-text" style="width: 200px;" /> ~
+                <input type="text" id="J_end" readonly   class="input-text" style="width: 200px;"/>
+                <div class="errormsg"></div>
+            </div>
+        </div>
+        <div class="dx-col cl">
+            <label class="f-lab">
+                <span class="fmust">*</span>考试类型：
+            </label>
+            <div class="f-con">
+                <select id="J_category">
+                    <option value="3">月考</option>
+                    <option value="2">期中考试</option>
+                    <option value="1">期末考试</option>
+                </select>
+            </div>
+        </div>
+        <div class="dx-col cl" id="J_selMonth">
+            <label class="f-lab">
+                <span class="fmust">*</span>考试月份：
+            </label>
+            <div class="f-con">
+                <select id="J_month">
+                    #foreach($index in [1..12])
+                        <option value="$index">${index}月</option>
+                    #end
+                </select>
+            </div>
+        </div>
+        <div class="dx-col cl">
+            <label class="f-lab">
+                考试内容：
+            </label>
+            <div class="f-con">
+                <textarea id="J_content" class="textarea" placeholder="请输入内容，200字以内"></textarea>
+                <div class="errormsg"></div>
+            </div>
+        </div>
+
+        <div class="dx-col cl">
+            <label class="f-lab">
+            </label>
+            <div class="f-con">
+                <input class="btn radius btn-warning" id="J_pubquiz" type="button" value="立即发布">
+
+            </div>
+        </div>
+    </form>
+	#else
+		<p>您没有发布考试铃的权限，请联系管理员。</p>
+	#end
+</div>

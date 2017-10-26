@@ -1,0 +1,50 @@
+.dx-my-bg{background: #f80; position: relative;height: 13rem;background-size:100%; padding-top: 3.5rem;}
+.dx-my-header{ width: 5.4rem;border:2px solid #fff; height: 5.4rem; display: block;  border-radius: 50%; margin: 0 auto;background: #fff; overflow: hidden;}
+.dx-my-header img{width: 5.4rem; height: 5.4rem;}
+.dx-my-name{ display: block; margin: 0 auto;  color:#fff; text-align: center;font-size: 1rem; margin-top: .5rem;}
+.dx-my-bg .edit{position: absolute; top:5.2rem; margin-left: 3rem;background: url(../img/modifyedit.png) no-repeat; background-size: 2rem 2rem;left:50%;width: 2rem; height: 2rem;}
+
+
+
+.dx-my-menu{background: #fff; margin: -1rem 0.75rem 1rem; position: relative;}
+.dx-my-menu .menulist{display: flex;}
+.dx-my-menu .menulist .menuitem{ width: 100%; display: table-cell; text-align: center;
+}
+.dx-my-menu .menulist .menuitem>a{display: block;color:#333;padding: 2rem 0 1rem 0;}
+.dx-my-menu .icon-my-child{width:4rem; height:4rem; background: url(../img/my-child.png) no-repeat; display: inline-block;
+   background-size: 4rem 4rem;}
+ .dx-my-menu .icon-my-setting{width:4rem; height:4rem; background: url(../img/my-setting.png) no-repeat; display: inline-block;
+    background-size: 4rem 4rem;}
+.dx-my-menu .menulist .menuitem:first-child{border-right: 1px solid #ddd;}
+.dx-my-menu .menulist .menuitem .lab{display: block; text-align: center; font-size: 1rem;}
+.dx-my-menu .menulist .menuitem .num{margin-left: 0.3rem; color: #f60; font-size: 0.85rem;}
+
+.settingicon{padding-left: 1.3rem; background: url(../img/settingiocn.png) no-repeat 0 center; background-size: 1.2rem 1.2rem;}
+
+.dx-about-us{background: #fff;height: 100%; padding: 2rem 0;}
+.dx-about-us .dx-about-logo{ width: 6rem; height: 6rem; display:block; margin: 0 auto 1rem; background: url(../img/icon.png) no-repeat;
+background-size: 6rem 6rem;}
+.dx-about-us .dx-version{ text-align:center; font-size: 1.2rem; color:#333; display: block;}
+.dx-about-us .button{border: 1px solid #ccc; color:#666;}
+
+.dx-myinfo .content-block{margin:0;}
+.dx-myinfo .content-block .list-block{margin:0.75rem 0;}
+.dx-setavatar{width: 3rem; height: 3rem;margin:0.75rem 0.75rem 0.75rem 0; float:right; display: block; overflow: hidden;border-radius: 100%;}
+.dx-setavatar img{width: 3rem; height: 3rem; }
+.fileupload{position: relative; }
+#J_file{width: 100%; height:100%; opacity: 0;display: block; position: absolute;  }
+
+.upimgbox{margin: 1rem;}
+.upimgbox img{}
+.dx-common-head .bar .button-link.headimg_save{padding-right: 1rem;}
+
+.dx-my-menu{box-shadow: 0 .05rem .1rem rgba(0,0,0,.3); margin: -1rem 0.5rem 1rem;}
+.dx-info-top{border-bottom:1px solid #ddd;  padding: 0.5rem;}
+.dx-info-top .dx-info-top-title{ line-height: 1.8rem;display: block;font-size: 0.85rem; background: url(../img/infoicon.png) no-repeat left center; padding-left:1.6rem; background-size: 1.35rem 1.35rem;}
+.dx-info-con{padding: 0.5rem;}
+.dx-info-con .infocol{line-height:1.8rem; color:#333;}
+.dx-info-con .infolab{width:5rem; display: inline-block; font-size: 0.75rem;text-align: right; color:#999;}
+
+.about_us_content{
+    color: #999;
+}

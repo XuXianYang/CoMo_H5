@@ -1,0 +1,65 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "考试铃 － 点线")
+<script>
+    window.currentPage = "my-ling";
+</script>
+
+<div class="dx-conwrap">
+
+    <div class="dx-toptab">
+        <ul>
+            <li class="active"><a href="${contextPath}${servletPath}/teacher/ling">考试铃</a></li>
+        </ul>
+    </div>
+    <div class="dx-subtab">
+        <ul>
+           #if($!canCreateQuiz)
+            <li >
+                <a href="${contextPath}${servletPath}/teacher/ling/do">发布考试</a>
+            </li>
+           #end
+            <li class="active">
+                <a href="${contextPath}${servletPath}/teacher/ling">已发布</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <table class="table table-border table-hover student-list">
+        <thead>
+        <tr>
+            <th style="width:120px;">考试名称</th>
+            <th style="width:120px;">考试时间</th>
+            <th style="width:150px;">考试类型</th>
+            <th>内容</th>
+            #if($!canCreateQuiz)
+            <th style="width: 150px;">操作</th>
+            #end
+        </tr>
+        </thead>
+        <tbody>
+            #foreach($item in $pagingInfo.list)
+            <tr>
+                <td>
+                    $!item.quiz.name
+                </td>
+                <td>$!DisplayUtils.formatDateTime($!item.quiz.startTime)
+                 <br /> $!DisplayUtils.formatDateTime($!item.quiz.endTime)</td>
+                <td>$!item.course.name / $!item.quiz.studyYear 级</td>
+                <td>$!item.quiz.description</td>
+                #if($!canCreateQuiz)
+                <td><a href="${contextPath}${servletPath}/teacher/ling/update?id=$item.quiz.id">编辑</a></td>
+                #end
+            </tr>
+            #end
+        </tbody>
+    </table>
+    #if($pagingInfo.list.size()>0)
+        <div class="pager pager-bottom">
+            #set($pageUrl="${contextPath}${servletPath}/teacher/homework?classid=$!{selclsss}&")
+            #parse("teacher/module/pageer.vm")
+        </div>
+    #else
+        <div class="Huialert Huialert-info"><i class="icon-remove"></i>暂无内容</div>
+    #end
+</div>

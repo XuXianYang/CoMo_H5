@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.school.dao.CourseScheduleDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.school.dto.CourseScheduleDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="class_id" property="classId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="day_of_week" property="dayOfWeek" jdbcType="INTEGER" />
+    <result column="lesson_of_day" property="lessonOfDay" jdbcType="INTEGER" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, class_id, course_id, day_of_week, lesson_of_day, created_by, updated_by, created_at, 
+    updated_at
+  </sql>
+
+  <select id="getCourseScheduleByClassAndCourse" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM course_schedule
+    WHERE 1 = 1
+    AND course_id IN
+    <foreach item="item" index="index" collection="courseIds"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    AND class_id = #{classId}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_schedule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course_schedule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.school.dto.CourseScheduleDto" >
+    insert into course_schedule (id, class_id, course_id, 
+      day_of_week, lesson_of_day, created_by, 
+      updated_by, created_at, updated_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, 
+      #{dayOfWeek,jdbcType=INTEGER}, #{lessonOfDay,jdbcType=INTEGER}, #{createdBy,jdbcType=BIGINT}, 
+      #{updatedBy,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.school.dto.CourseScheduleDto" >
+    insert into course_schedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="dayOfWeek != null" >
+        day_of_week,
+      </if>
+      <if test="lessonOfDay != null" >
+        lesson_of_day,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="dayOfWeek != null" >
+        #{dayOfWeek,jdbcType=INTEGER},
+      </if>
+      <if test="lessonOfDay != null" >
+        #{lessonOfDay,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.school.dto.CourseScheduleDto" >
+    update course_schedule
+    <set >
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="dayOfWeek != null" >
+        day_of_week = #{dayOfWeek,jdbcType=INTEGER},
+      </if>
+      <if test="lessonOfDay != null" >
+        lesson_of_day = #{lessonOfDay,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.school.dto.CourseScheduleDto" >
+    update course_schedule
+    set class_id = #{classId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      day_of_week = #{dayOfWeek,jdbcType=INTEGER},
+      lesson_of_day = #{lessonOfDay,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <delete id="deleteByClassId" parameterType="java.lang.Long" >
+        delete from course_schedule
+        where class_id = #{classId}
+    </delete>
+
+    <insert id="batchInsert" parameterType="com.dianxian.school.dto.CourseScheduleDto" >
+        insert into course_schedule (course_id, class_id, day_of_week, lesson_of_day, created_by, created_at)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            ( #{item.courseId,jdbcType=BIGINT}, #{item.classId,jdbcType=BIGINT},
+            #{item.dayOfWeek,jdbcType=BIGINT}, #{item.lessonOfDay,jdbcType=BIGINT}, #{item.createdBy,jdbcType=BIGINT}, now())
+        </foreach>
+    </insert>
+    <select id="getCourseScheduleByClass" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from course_schedule
+        where class_id = #{classId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

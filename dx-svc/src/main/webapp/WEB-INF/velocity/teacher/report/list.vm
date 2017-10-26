@@ -1,0 +1,40 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "小报告 － 点线")
+<script>
+    window.currentPage = "my-report";
+</script>
+
+<div class="dx-conwrap">
+   <table class="table table-border table-hover student-list">
+       <thead>
+       <tr>
+           <th style="width:120px;">创建时间</th>
+           <th style="width:150px;">班级</th>
+           <th style="width:120px;">学生</th>
+           <th>内容</th>
+       </tr>
+       </thead>
+       <tbody>
+           #foreach($item in $pagingInfo.list)
+           #if($!hasNewSneakingMessagesResult.hasNewSneakingMessages && $!{DisplayUtils.before($!hasNewSneakingMessagesResult.lastViewTime, $!item.createdAt)})
+           	<tr class="warning" >
+           #else
+           	<tr>
+           #end
+               <td>$!DisplayUtils.formatDateTime($!item.createdAt)</td>
+               <td>$!{item.classInfo.className}</td>
+               <td>$!{item.student.realName}</td>
+               <td>#if($!{item.content}) $!{item.content} #else 无内容 #end</td>
+           </tr>
+           #end
+       </tbody>
+   </table>
+   #if($pagingInfo.list.size()>0)
+       <div class="pager pager-bottom">
+           #set($pageUrl="${contextPath}${servletPath}/teacher/report/list?")
+           #parse("teacher/module/pageer.vm")
+       </div>
+   #else
+       <div class="Huialert Huialert-info"><i class="icon-remove"></i>暂无内容</div>
+   #end
+</div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-lazy-init="true">
+
+    <bean id="logAspectBean" class="com.dianxian.core.spring.log.InvocationLogAspect">
+        <property name="useTargetLogger" value="true" />
+    </bean>
+    <aop:config>
+        <aop:aspect id="logAspect" ref="logAspectBean">
+            <!--配置facade包下所有类或接口的所有方法-->
+            <aop:pointcut id="facadePointCut"
+                          expression="execution(* com.dianxian..*Facade.*(..))" />
+            <aop:around pointcut-ref="facadePointCut" method="doAround" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>

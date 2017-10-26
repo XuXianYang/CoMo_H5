@@ -1,0 +1,39 @@
+.form-add-score .nice-select {
+  height: 32px;
+  line-height: 30px;
+}
+
+#input-reciever .nice-select {
+  width: 100%;
+}
+
+#input-reciever .nice-select:after {
+  font-family: "Hui-iconfont" !important;
+  content: "\e62c";
+  margin-top: -16px;
+  border-bottom: none;
+  border-right: none;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+}
+
+#input-reciever .nice-select.open:after {
+  color: #fea700;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+}
+
+.score-excel {
+  width: 200px;
+}
+
+.btn-cancel {
+  background-color: #efefef;
+  color: #999;
+}
+
+.btn-publish-score-wrapper {
+	position: relative;
+}

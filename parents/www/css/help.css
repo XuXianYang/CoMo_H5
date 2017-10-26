@@ -1,0 +1,28 @@
+.dx-help{padding: 0.5rem;}
+
+.dx-help-top{height: 12rem; margin-bottom: 1rem;background: #f00 url(../img/help-danger-bg.png) center 0.5rem no-repeat; background-size: 9rem 9rem;}
+.dx-help-top-dword{font-size: 1rem; color:#fff;  text-align: center; padding-top: 10rem;}
+.dx-help .day{margin-bottom:0.5rem;}
+.dx-help .day .day-date{font-size: 0.5rem; color:#999; line-height: 1rem;;padding-left: 2rem; width: 5rem; text-align: center;}
+
+.dx-help .day .day-content{background: url(../img/help-line.png) 3.45rem 0 repeat-y;}
+.day-content .day-time{margin-bottom: 1rem; display: flex;}
+.day-content .day-time .day-time-item{font-weight: bold;width: 2.85rem; line-height: 1.5rem;text-align: center; font-size: .7rem;}
+.day-content .day-time .day-type-icon{width:1.3rem; }
+.day-content .day-time .day-type-icon i{width: 1.3rem; height:1.3rem; display: inline-block; vertical-align: middle;
+  border-radius: 0.5rem;  background-size:cover;
+}
+.day-type-icon i.i-danger{background: url(../img/help-error.png) no-repeat;}
+.day-type-icon i.i-qiandao{background: url(../img/help-qiandao.png) no-repeat;}
+.day-type-icon i.i-book{background: url(../img/help-book.png) no-repeat;}
+.day-content .day-time .day-item-detail{width: 74%; line-height: 1.5rem; font-size: 0.75rem; padding-left: 1rem; }
+.day-item-detail .danger{display: flex;
+justify-content:space-between;  }
+.day-item-detail .danger .showpos{background: #2284fe; font-size: 0.65rem; color:#fff; margin: 0.03rem 0; padding: 0 0.5rem;}
+.day-item-detail .qd-tip{font-size: 0.5rem;}
+.day-item-detail .danger-tip{font-size: 0.5rem; line-height: 0.9rem;}
+
+.dx-help-postbox{margin: 0;}
+.dx-help-postbox .card-content-inner{padding: 0.4rem 0.75rem;}
+.dx-help-postbox p{margin: 0.2rem 0; line-height: 1rem;font-size: 0.6rem;}
+.dx-help-postbox .post-title{font-size:.8rem; margin: 0.4rem 0;color:#333;}

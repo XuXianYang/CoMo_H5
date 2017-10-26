@@ -1,0 +1,319 @@
+.dx-group{ padding-top: 30px;}
+.dx-group .lab{float:left;width:120px; text-align: right;}
+.dx-group .classlist{width: 500px; }
+.dx-group .classlist .classitem{border:1px solid #45B1A6;
+    height: 24px; float: left; margin-right: 15px; position: relative;}
+
+.dx-group .classlist .classitem a{display:block; border:1px solid #fff;
+    line-height: 22px;padding:0 5px;}
+.dx-group .classlist .classitem a:hover{text-decoration: none;color:#333;}
+.dx-group .classlist .classitem.sel a{border:1px solid #45B1A6;}
+.dx-group .classlist .classitem.sel .selicon {display: block; position: absolute;right:0px;
+    bottom:0px; color:#090; line-height: 12px; font-size: 12px;}
+
+.talk-content{ padding: 1rem 0.75rem; background: #f5f5f5; overflow-y:auto;}
+.talk-content .talkitem{ margin-bottom: 10px;}
+.talk-content .talkitem .headicon{width: 50px; height:50px; float:left;}
+.talk-content .talkitem .headicon img{width: 50px; height:50px;}
+.talk-content .talkitem .talkinfo{ margin-left: 60px;}
+.talk-content .talkitem .talkname{font-size: 12px; margin-bottom: 6px;display: block;color:#999;vertical-align: top;line-height: 20px;}
+.talk-content .talkitem .talkout{display: block;margin-right: 20px;}
+.talk-content .talkitem .talkmessage{background: #fff; border-radius: 6px;
+    border:1px solid #ddd;word-break:break-all;word-wrap:break-word;
+    padding:10px; font-size: 15px; line-height: 20px; float:left;}
+.talkitem .face{width: 32px; height: 32px; background-size: 32px auto; float:none; display: inline-block;
+    margin:0; vertical-align:middle;
+}
+
+.talk-content .talkitemme .headicon{float:right;}
+.talk-content .talkitemme .talkinfo{ margin-right: 60px; margin-left: 0;}
+.talk-content .talkitemme .talkout{margin-left:20px; margin-right:0;}
+.talk-content .talkitemme .talkmessage{ background: #18cd6d; float:right; color:#fff;}
+.talk-content .talkitemme .talkname{text-align: right;}
+
+.talktips{padding: 10px 0; color:#999; text-align: center;  font-size:12px;}
+
+.talkallbox{width: 780px;border:1px solid #ddd; margin: 20px 0 0 20px;}
+.talkallbox .top{height: 40px; line-height: 40px; padding-left: 10px;
+    border-bottom: 1px solid #ddd;;
+}
+.talkallbox .talk-content{height: 300px;border-bottom: 1px solid #ddd;}
+
+
+.dx-talksimple{ height: 60px; }
+.dx-talksimple .emojicon{float: left; width: 50px; font-size: 30px; text-align: center; line-height: 60px;}
+.dx-talksimple .txt{height: 50px; border:none; border-bottom: 1px solid #ddd;
+    width: 650px; margin-top:5px; font-size:14px; line-height: 20px; resize: none;
+}
+.dx-talksimple .talksendbtn{float: right; margin:15px 10px 0 0;}
+
+
+
+
+
+.dx-emoji .swiper-slide{}
+.dx-emoji .swiper-slide img{width: 100%; }
+.dx-emoji .swiper-pagination{bottom:0;}
+
+.replyer-panel .emoji{padding:0 10px;}
+.replyer-panel .emoji>i{font-size:30px;}
+.content-tab-face{width: 100%;}
+.face-main{display:none;}
+.face.face_1 {
+    background-image: url(./face/face-1.png);
+}
+.face.face_2 {
+    background-image: url(./face/face-2.png);
+}
+.face.face_3 {
+    background-image: url(./face/face-3.png);
+}
+.face.face_4 {
+    background-image: url(./face/face-4.png);
+}
+.face {
+    float: left;
+    margin: 4px 0;
+    width: 14.28%;
+    height: 32px;
+    background-repeat: no-repeat;
+    -webkit-background-size: 32px auto;
+    background-size: 32px auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.face.icon_0 {
+    background-position: 50% 0
+}
+
+.face.icon_1 {
+    background-position: 50% -32px
+}
+
+.face.icon_2 {
+    background-position: 50% -64px
+}
+
+.face.icon_3 {
+    background-position: 50% -96px
+}
+
+.face.icon_4 {
+    background-position: 50% -128px
+}
+
+.face.icon_5 {
+    background-position: 50% -160px
+}
+
+.face.icon_6 {
+    background-position: 50% -192px
+}
+
+.face.icon_7 {
+    background-position: 50% -224px
+}
+
+.face.icon_8 {
+    background-position: 50% -256px
+}
+
+.face.icon_9 {
+    background-position: 50% -288px
+}
+
+.face.icon_10 {
+    background-position: 50% -320px
+}
+
+.face.icon_11 {
+    background-position: 50% -352px
+}
+
+.face.icon_12 {
+    background-position: 50% -384px
+}
+
+.face.icon_13 {
+    background-position: 50% -416px
+}
+
+.face.icon_14 {
+    background-position: 50% -448px
+}
+
+.face.icon_15 {
+    background-position: 50% -480px
+}
+
+.face.icon_16 {
+    background-position: 50% -512px
+}
+
+.face.icon_17 {
+    background-position: 50% -544px
+}
+
+.face.icon_18 {
+    background-position: 50% -576px
+}
+
+.face.icon_19 {
+    background-position: 50% -608px
+}
+
+.face.icon_20 {
+    background-position: 50% -640px
+}
+
+.face.icon_21 {
+    background-position: 50% -672px
+}
+
+.face.icon_22 {
+    background-position: 50% -704px
+}
+
+.face.icon_23 {
+    background-position: 50% -736px
+}
+
+.face.icon_24 {
+    background-position: 50% -768px
+}
+
+.face.icon_25 {
+    background-position: 50% -800px
+}
+
+.face.icon_26 {
+    background-position: 50% -832px
+}
+
+.face.icon_27 {
+    background-position: 50% -864px
+}
+
+/*--缂栬瘧鍚庣殑鏍峰紡--*/
+.replyer-emoji-box .face{overflow: hidden;
+    text-indent: -300px;
+    float: none;
+    display: inline-block;
+    margin: 0 2px;
+    width: 22px;
+    height: 22px;
+    vertical-align: top;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;}
+.replyer-emoji-box .face.icon_0 {
+    background-position: 50% 0
+}
+
+.replyer-emoji-box .face.icon_1 {
+    background-position: 50% -22px
+}
+
+.replyer-emoji-box .face.icon_2 {
+    background-position: 50% -44px
+}
+
+.replyer-emoji-box .face.icon_3 {
+    background-position: 50% -66px
+}
+
+.replyer-emoji-box .face.icon_4 {
+    background-position: 50% -88px
+}
+
+.replyer-emoji-box .face.icon_5 {
+    background-position: 50% -110px
+}
+
+.replyer-emoji-box .face.icon_6 {
+    background-position: 50% -132px
+}
+
+.replyer-emoji-box .face.icon_7 {
+    background-position: 50% -154px
+}
+
+.replyer-emoji-box .face.icon_8 {
+    background-position: 50% -176px
+}
+
+.replyer-emoji-box .face.icon_9 {
+    background-position: 50% -198px
+}
+
+.replyer-emoji-box .face.icon_10 {
+    background-position: 50% -220px
+}
+
+.replyer-emoji-box .face.icon_11 {
+    background-position: 50% -242px
+}
+
+.replyer-emoji-box .face.icon_12 {
+    background-position: 50% -264px
+}
+
+.replyer-emoji-box .face.icon_13 {
+    background-position: 50% -286px
+}
+
+.replyer-emoji-box .face.icon_14 {
+    background-position: 50% -308px
+}
+
+.replyer-emoji-box .face.icon_15 {
+    background-position: 50% -330px
+}
+
+.replyer-emoji-box .face.icon_16 {
+    background-position: 50% -352px
+}
+
+.replyer-emoji-box .face.icon_17 {
+    background-position: 50% -374px
+}
+
+.replyer-emoji-box .face.icon_18 {
+    background-position: 50% -396px
+}
+
+.replyer-emoji-box .face.icon_19 {
+    background-position: 50% -418px
+}
+
+.replyer-emoji-box .face.icon_20 {
+    background-position: 50% -440px
+}
+
+.replyer-emoji-box .face.icon_21 {
+    background-position: 50% -462px
+}
+
+.replyer-emoji-box .face.icon_22 {
+    background-position: 50% -484px
+}
+
+.replyer-emoji-box .face.icon_23 {
+    background-position: 50% -506px
+}
+
+.replyer-emoji-box .face.icon_24 {
+    background-position: 50% -528px
+}
+
+.replyer-emoji-box .face.icon_25 {
+    background-position: 50% -550px
+}
+
+.replyer-emoji-box .face.icon_26 {
+    background-position: 50% -572px
+}
+
+.replyer-emoji-box .face.icon_27 {
+    background-position: 50% -594px
+}

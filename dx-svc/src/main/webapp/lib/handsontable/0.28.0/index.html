@@ -1,0 +1,41 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="screen" href="handsontable.full.css">
+	<script src="handsontable.full.js"></script>
+</head>
+<body>
+	<div id="table-wrapper">
+
+	</div>
+
+	<script>
+		var data = [
+			{id: 4, name: '张三', phoneNumber: '12100000000', parents: '(父) fsfasfsffsdfa', score: ''},
+			{id: 5, name: '张三2', phoneNumber: '12100000002', parents: '', score: ''},
+			{id: 6, name: '张三3', phoneNumber: '12100000003', parents: '', score: ''}
+		],
+		container = document.getElementById('table-wrapper'),
+		hot;
+
+		hot = new Handsontable(container, {
+			data: data,
+			minSpareRows: 1,
+			maxRows: data.length,
+			colHeaders: ['学生ID', '姓名', '手机号码', '家长', '成绩'],
+			rowHeaders: true,
+			columns: [
+				{data: 'id', readOnly: true},
+				{data: 'name', readOnly: true},
+				{data: 'phoneNumber', readOnly: true},
+				{data: 'parents', readOnly: true},
+				{data: 'score', readOnly: false}
+			],
+			currentRowClassName: 'currentRow',
+  		currentColClassName: 'currentCol',
+			contextMenu: false
+		});
+	</script>
+</body>
+</html>

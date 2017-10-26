@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.school.dao.HomeworkDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.school.dto.HomeworkDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="class_id" property="classId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="teacher_id" property="teacherId" jdbcType="BIGINT" />
+    <result column="resource_file_id" property="resourceFileId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="study_date" property="studyDate" jdbcType="DATE" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dianxian.school.dto.HomeworkDto" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, class_id, course_id, teacher_id, resource_file_id, name, study_date, created_by, updated_by,
+    created_at, updated_at
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from homework
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from homework
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.school.dto.HomeworkDto" useGeneratedKeys="true" keyProperty="id" >
+    insert into homework (class_id, course_id, teacher_id,
+      resource_file_id, name, study_date, 
+      created_by, created_at, description)
+    values (#{classId,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{teacherId,jdbcType=BIGINT},
+      #{resourceFileId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{studyDate,jdbcType=DATE}, 
+      #{createdBy,jdbcType=BIGINT}, now(), #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.school.dto.HomeworkDto" >
+    insert into homework
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="resourceFileId != null" >
+        resource_file_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="studyDate != null" >
+        study_date,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceFileId != null" >
+        #{resourceFileId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="studyDate != null" >
+        #{studyDate,jdbcType=DATE},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.school.dto.HomeworkDto" >
+    update homework
+    <set >
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceFileId != null" >
+        resource_file_id = #{resourceFileId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="studyDate != null" >
+        study_date = #{studyDate,jdbcType=DATE},
+      </if>
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        updated_at = now(),
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dianxian.school.dto.HomeworkDto" >
+    update homework
+    set class_id = #{classId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      resource_file_id = #{resourceFileId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      study_date = #{studyDate,jdbcType=DATE},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.school.dto.HomeworkDto" >
+    update homework
+    set class_id = #{classId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      resource_file_id = #{resourceFileId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      study_date = #{studyDate,jdbcType=DATE},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="getHomeworkOfClass" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from homework
+        where class_id = #{classId} and study_date = #{studyDate}
+        order by id asc
+    </select>
+
+    <select id="getHomeworkOfClassByTeacherId" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from homework
+        where class_id = #{classId} and teacher_id = #{teacherId}
+        order by id asc
+    </select>
+
+    <select id="getHomeworkOfClassByCourse" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from homework
+        where class_id = #{classId} and study_date = #{studyDate} and course_id = #{courseId}
+        order by id asc
+    </select>
+</mapper>

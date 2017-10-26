@@ -1,0 +1,31 @@
+<div class="dx-top-panel">
+		<div class="title">
+			我的班级<span class="h-sep">|</span><span id="current-class" class="current-class">${currentClass.name}</span><span class="h-sep">|</span><span class="class-master">班主任：#if($!{masterTeacher.name}) $!{masterTeacher.name} #else 暂无 #end</span>
+		</div>
+		<div class="v-sep"></div>
+		<div class="class-list btn-selector-group"
+			data-value="${currentClass.id}"
+			data-type="radio">
+			#foreach($theClass in $joinedClasses)
+				<a href="javascript:void(0);" class="btn btn-selector #if($!currentClass.id == $!theClass.id) selected #end"
+					data-value="${theClass.id}">${theClass.name}</a>
+			#end
+			<a id="btn-add-class" href="${contextPath}/web/teacher/class/join"
+				class="btn btn-add-class">添加班级</a>
+		</div>
+</div>
+
+<div class="dx-subtab">
+		<ul>
+				<li class="#if($pageTab == "student-list") active #end">
+						<a href="${contextPath}/web/teacher/class/student/list">我的学生</a>
+				</li>
+				<li class="#if($pageTab == "assignment-list") active #end">
+						<a href="${contextPath}/web/teacher/class/assignment/list">任课老师</a>
+				</li>
+				<li class="#if($pageTab == "class-information") active #end">
+						<a href="${contextPath}/web/teacher/class/information">班级管理</a>
+				</li>
+
+		</ul>
+</div>

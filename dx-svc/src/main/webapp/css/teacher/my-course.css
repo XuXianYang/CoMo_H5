@@ -1,0 +1,36 @@
+.dx-coursesel{}
+.dx-coursesel .lab{float:left;width:120px; text-align: right;}
+.dx-coursesel .classlist{width: 500px; }
+.dx-coursesel .classlist .classitem{border:1px solid #45B1A6;
+    height: 24px; float: left; margin-right: 15px; position: relative;}
+
+.dx-coursesel .classlist .classitem a{display:block; border:1px solid #fff;
+    line-height: 22px;padding:0 5px;}
+.dx-coursesel .classlist .classitem a:hover{text-decoration: none;color:#333;}
+.dx-coursesel .classlist .classitem.sel a{border:1px solid #45B1A6;}
+.dx-coursesel .classlist .classitem.sel .selicon {display: block; position: absolute;right:0px;
+    bottom:0px; color:#090; line-height: 12px; font-size: 12px;}
+
+table tr th:first-child,
+table tr td:first-child {
+    padding-left: 0;
+}
+.coursebox{margin-top: 20px; padding-left: 30px;}
+.coursetable{width: 660px;}
+.coursetable th,.coursetable td{text-align: center; border:1px solid #ddd;}
+.coursetable-tr td{width: 20%;}
+.coursetable th{font-size:16px; font-weight:bold; height: 36px;}
+.coursetable td{height: 28px; position: relative;}
+.coursetable-tr .downitem{background:#D8F5F3; position: absolute; top:-1px; bottom:-1px; left:-1px; right:-1px;
+    border:1px solid #76C8C1;box-shadow:1px 1px 1px #ddd; line-height: 26px;}
+.coursetable-tr td.editing{cursor: pointer;}
+.allcourselist{ position: absolute; background: #D8F5F3;z-index: 1000; box-shadow:1px 1px 1px #ddd; border:1px solid #76C8C1; top:28px; left:-1px;width: 131px;}
+.allcourselist li{width: 65px; height: 28px; border-right:1px solid #76C8C1; border-bottom:1px solid #76C8C1; line-height: 28px; text-align: center; float:left;  display: inline-block;}
+.allcourselist li.seld{background: #45b1a6;}
+.allcourselist li:hover{background: #a5c1c6;}
+.allcourselist li.noright{border-right:none;}
+.allcourselist li.nobottom{border-bottom:none;}
+.allcourselist li.removecourse{width: 131px;border:none;}
+.coursetable .coursearrow{ position: absolute; right:10px; }
+
+.btnopbox{text-align: center; width: 660px; padding: 20px 0;}

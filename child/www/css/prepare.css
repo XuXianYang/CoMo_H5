@@ -1,0 +1,35 @@
+html{background-color:#f1f1f1;}
+.pretop{ height:40px;}
+.pretop .back-icon{ display: block; width: 40px; height:40px; float:left;
+  background: url(../img/backicon.png) center no-repeat;
+  background-size:25px 25px;}
+.pretop .dx-title{line-height: 40px; font-size: 18px; color:#333; display: block;}
+
+.topbg{height:120px; margin-bottom: 8px;}
+.topbg.register{ background: url(../img/registerbg.png) center no-repeat;
+background-size: 120px 120px;}
+.topbg.login{ background: url(../img/icon.png) center no-repeat;
+background-size: 120px 120px;}
+
+.list-block .dx-yzm.label{width: 6rem; font-size: 0.7rem; text-align: right;}
+.dx-yzm .button{font-size: 0.6rem;}
+
+.dx-index{background: #fff;}
+.dx-indexswiper .swiper-slide{}
+.dx-indexswiper .swiper-slide img{width: 100%; }
+.dx-indexswiper .swiper-pagination{bottom:0;}
+.dx-preopbox{}
+.dx-preopbox .forgetpwd{text-align: right;}
+
+/*child*/
+.clean-text-input {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    z-index: 2;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+}

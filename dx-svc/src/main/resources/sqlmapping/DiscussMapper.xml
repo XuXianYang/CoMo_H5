@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.school.dao.DiscussMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.school.domain.Discuss" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="act_id" property="actId" jdbcType="BIGINT" />
+    <result column="src_id" property="srcId" jdbcType="BIGINT" />
+    <result column="tar_id" property="tarId" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, act_id, src_id, tar_id, content, created_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dianxian.school.domain.DiscussExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from discuss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from discuss
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from discuss
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dianxian.school.domain.DiscussExample" >
+    delete from discuss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.school.domain.Discuss" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into discuss (act_id, src_id, tar_id, 
+      content, created_at)
+    values (#{actId,jdbcType=BIGINT}, #{srcId,jdbcType=BIGINT}, #{tarId,jdbcType=BIGINT}, 
+      #{content,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.school.domain.Discuss" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into discuss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        act_id,
+      </if>
+      <if test="srcId != null" >
+        src_id,
+      </if>
+      <if test="tarId != null" >
+        tar_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        #{actId,jdbcType=BIGINT},
+      </if>
+      <if test="srcId != null" >
+        #{srcId,jdbcType=BIGINT},
+      </if>
+      <if test="tarId != null" >
+        #{tarId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dianxian.school.domain.DiscussExample" resultType="java.lang.Integer" >
+    select count(*) from discuss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update discuss
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.actId != null" >
+        act_id = #{record.actId,jdbcType=BIGINT},
+      </if>
+      <if test="record.srcId != null" >
+        src_id = #{record.srcId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tarId != null" >
+        tar_id = #{record.tarId,jdbcType=BIGINT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update discuss
+    set id = #{record.id,jdbcType=BIGINT},
+      act_id = #{record.actId,jdbcType=BIGINT},
+      src_id = #{record.srcId,jdbcType=BIGINT},
+      tar_id = #{record.tarId,jdbcType=BIGINT},
+      content = #{record.content,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.school.domain.Discuss" >
+    update discuss
+    <set >
+      <if test="actId != null" >
+        act_id = #{actId,jdbcType=BIGINT},
+      </if>
+      <if test="srcId != null" >
+        src_id = #{srcId,jdbcType=BIGINT},
+      </if>
+      <if test="tarId != null" >
+        tar_id = #{tarId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.school.domain.Discuss" >
+    update discuss
+    set act_id = #{actId,jdbcType=BIGINT},
+      src_id = #{srcId,jdbcType=BIGINT},
+      tar_id = #{tarId,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findBySrcId" resultType="long" >
+    SELECT
+        dis.act_id act_id
+    FROM discuss dis
+    WHERE 1 = 1
+    <if test="userId != null">
+      AND dis.src_id = #{userId}
+    </if>
+    GROUP BY dis.act_id
+    ORDER BY dis.created_at DESC
+  </select>
+
+</mapper>

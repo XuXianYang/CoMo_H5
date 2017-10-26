@@ -1,0 +1,27 @@
+#set($layout = "layout/sysadmin_layout.vm")
+#set($pageTitle = "创建学校")
+#set($scripts = ["js/sysadmin/school_create.js"])
+<div class="main-wide-wrap">
+    <div class="page-title">
+        $pageTitle
+    </div>
+    <form class="ui form">
+        <div class="field required">
+            <label>名称</label>
+            <input id="name" name="name" type="text" >
+        </div>
+        <div class="field required">
+            <label>类型</label>
+            <select name="category" class="ui dropdown">
+                <option value="">类型</option>
+                <option value="2">初中</option>
+                <option value="3">高中</option>
+            </select>
+        </div>
+        <div class="ui error message">
+            <p id="errorMsg"></p>
+        </div>
+        <a id="submitBtn" class="ui button">确定</a>
+        <a id="cancelBtn" href="${contextPath}${servletPath}/sysadmin/school/list" class="ui button">取消</a>
+    </form>
+</div>

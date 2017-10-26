@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+       default-lazy-init="true">
+
+    <!-- ========================================配置数据源========================================= -->
+    <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource" init-method="getConnection">
+        <!--数据库连接信息-->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!--连接数配置，根据不同应用实际连接数调整 -->
+        <!--初始化连接数：默认为0，启动时创建的连接数,1.2版本之后才支持，建议初始1-->
+        <property name="initialSize" value="${jdbc.conn.initial.size}"/>
+        <!--最大活跃连接数：默认为8，连接池同时可分配的最大连接数，如果设负数为无限制（不建议），建议15-->
+        <property name="maxActive" value="${jdbc.conn.max.active}"/>
+        <!--最大空闲连接数：默认为8，连接池允许保留的的最大空闲连接数，如果设负数为无限制（不建议），建议接近maxActive-->
+        <property name="maxIdle" value="${jdbc.conn.max.idle}"/>
+        <!--最小空闲连接数：默认为0，连接池允许保留的的最小空闲连接数，建议5-->
+        <property name="minIdle" value="${jdbc.conn.min.idle}"/>
+        <!--获取连接时的最大等待时间，默认无限制，单位milliseconds，建议5000/1000=5秒-->
+        <property name="maxWait" value="${jdbc.conn.max.wait}"/>
+
+        <!-- 是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除。建议开启 -->
+        <property name="testWhileIdle" value="true"/>
+        <!-- 是否从连接池中取出连接前进行检验,如果检验失败, 则从池中去除连接并尝试取出另一个。建议开启-->
+        <property name="testOnBorrow" value="false"/>
+        <!-- 是否在归还到连接池中前进行检验，建议开启上一项关闭此项 -->
+        <property name="testOnReturn" value="false"/>
+        <!-- 检测用SQL，验证从连接池取出的连接,在将连接返回给调用者之前，以上三项有一项为true时必须指定，mysql改用select 1-->
+        <property name="validationQuery">
+            <value>select 1</value>
+        </property>
+        <!--空闲连接回收器线程运行期间休眠的时间值，默认-1(不运行)，单位milliseconds(毫秒)，建议间隔10000/1000=10秒-->
+        <property name="timeBetweenEvictionRunsMillis" value="10000"/>
+        <!--每次空闲连接回收器线程(如果有)运行时检查的连接数量，默认3，建议3-->
+        <property name="numTestsPerEvictionRun" value="3"/>
+        <!--连接在池中保持空闲而不被空闲连接回收器线程(如果有)回收的最小时间值，默认1000 * 60 * 30，单位milliseconds(毫秒)，建议使用默认值（可以不配此项）-->
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+
+        <!--是否自动回收超时连接，建议开启-->
+        <property name="removeAbandoned" value="true"/>
+        <!--超时时间,默认300，单位seconds，建议60秒，如果有特殊需求的可以增加-->
+        <property name="removeAbandonedTimeout" value="60"/>
+    </bean>
+
+    <!-- ========================================针对myBatis的配置项============================== -->
+    <!-- 配置sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描目录下的所有SQL映射的xml文件, 省掉Configuration.xml里的手工配置
+        value="classpath:sqlmapping/*.xml"指的是classpath(类路径)下sqlmapping包中的所有xml文件
+        UserDtoMapper.xml位于sqlmapping包下，这样UserMapper.xml就可以被自动扫描
+         -->
+        <property name="mapperLocations" value="classpath:sqlmapping/*.xml" />
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <props>
+                            <prop key="dialect">mysql</prop>
+                            <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+                            <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+                            <prop key="pageSizeZero">true</prop>
+                            <!-- always总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page -->
+                            <prop key="returnPageInfo">none</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <!-- 配置扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描这个包以及它的子包下的所有映射接口类 -->
+        <property name="basePackage" value="com.dianxian" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <!-- ========================================分隔线========================================= -->
+    <!-- 配置Spring的事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 注解方式配置事物 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>

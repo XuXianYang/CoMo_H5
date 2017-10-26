@@ -1,0 +1,44 @@
+.dx-my-bg{background: url(../img/my-bg.png) no-repeat; position: relative;height: 13rem;background-size:100%; padding-top: 3.5rem;}
+.dx-my-header{ width: 5.4rem;border:2px solid #fff; height: 5.4rem; display: block;  border-radius: 50%; margin: 0 auto;background: #fff; overflow: hidden;}
+.dx-my-header img{width: 5.4rem; height: 5.4rem;}
+.dx-my-name{ display: block; margin: 0 auto;  color:#fff; text-align: center;font-size: 1rem; margin-top: .5rem;}
+.dx-my-bg .edit{position: absolute; top:5.2rem; margin-left: 3rem;background: url(../img/modifyedit.png) no-repeat; background-size: 2rem 2rem;left:50%;width: 2rem; height: 2rem;}
+
+
+.dx-my-menu{background: #fff; margin: -1rem 0.75rem 1rem; position: relative;}
+.dx-my-menu .menulist{display: flex;}
+.dx-my-menu .menulist .menuitem{ width: 100%; display: table-cell; text-align: center;
+}
+.dx-my-menu .menulist .menuitem>a{display: block;color:#333;padding: 2rem 0 1rem 0;}
+.dx-my-menu .icon-my-child{width:4rem; height:4rem; background: url(../img/my-child.png) no-repeat; display: inline-block;
+   background-size: 4rem 4rem;}
+ .dx-my-menu .icon-my-setting{width:4rem; height:4rem; background: url(../img/my-setting.png) no-repeat; display: inline-block;
+    background-size: 4rem 4rem;}
+.dx-my-menu .menulist .menuitem:first-child{border-right: 1px solid #ddd;}
+.dx-my-menu .menulist .menuitem .lab{display: block; text-align: center; font-size: 1rem;}
+.dx-my-menu .menulist .menuitem .num{margin-left: 0.3rem; color: #f60; font-size: 0.85rem;}
+
+
+.dx-about-us{background-size: cover; height: 100%; padding: 2rem 0; min-height: 22.5rem;}
+.dx-about-us .dx-about-logo{ background: url(../img/icon2.png) center no-repeat; background-size: 120px 120px;}
+
+.topbg{height:120px; margin-bottom: 8px;}
+.topbg.about-us{ background: url(../img/icon2.png) center no-repeat;
+    background-size: 120px 120px;}
+
+.dx-about-us .dx-version{ text-align:center; font-size: 1.2rem; display: block;}
+.dx-about-us .button{border: 1px solid;}
+
+.dx-myinfo .content-block{margin:0;}
+.dx-myinfo .content-block .list-block{margin:0.75rem 0;}
+.dx-setavatar{width: 3rem; height: 3rem;margin:0.75rem 0.75rem 0.75rem 0; float:right; display: block; overflow: hidden;border-radius: 100%;}
+.dx-setavatar img{width: 3rem; height: 3rem; }
+.fileupload{position: relative; }
+#J_file{width: 100%; height:100%; opacity: 0;display: block; position: absolute;  }
+.upimgbox{margin: 1rem;}
+.upimgbox img{}
+.dx-common-head .bar .button-link.headimg_save{padding-right: 1rem;}
+
+.dx-info-con{padding: 0.5rem;}
+.dx-info-con .infocol{line-height:1.8rem; }
+.dx-info-con .infolab{width:5rem; display: inline-block; font-size: 0.75rem;text-align: right;}

@@ -1,0 +1,27 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "成绩详情 － 我的发布")
+#set($styles = ["teacher/my-publishment.css", "teacher/my-publishment-score.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js","teacher/my-publishment.js", "teacher/score.js"])
+#set($libstyles = ["handsontable/0.28.0/handsontable.full.min.css"])
+#set($libscripts = ["handsontable/0.28.0/handsontable.full.min.js"])
+
+
+<div class="dx-conwrap">
+    #set($toptab="score")
+    #parse("teacher/module/toptab.vm")
+    <div class="dx-subtab">
+        <ul>
+            <li class="active">
+                <a>发布成绩</a>
+            </li>
+            <li>
+               <a href="${contextPath}/web/teacher/score/list">已发布</a>
+            </li>
+        </ul>
+    </div>
+    <div class="quiz-title">$!{currentCourseQuiz.quiz.name} - $!{currentCourseQuiz.course.name}</div>
+	<div id="score-list" class="score-list"></div>
+	<script id="students-json-input" type="type/json">$!students</script>
+	<script id="scores-json-input" type="type/json">$!scores</script>
+	<input id="can-edit-input" type="hidden" value="false">
+</div>

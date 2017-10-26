@@ -1,0 +1,82 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "课程表管理-点线")
+#set($styles = ["teacher/my-course.css"])
+#set($scripts=['teacher/json2.js','teacher/course.js'])
+<script>
+    window.currentPage = "my-publishment";
+</script>
+<div class="dx-conwrap">
+
+    #set($toptab="course")
+    #parse("teacher/module/toptab.vm")
+    <div class="noclass" style="display: none;">
+        <div class="Huialert Huialert-danger"><i class="Hui-iconfont Hui-iconfont-shenhe-weitongguo"></i>班主任才能进行课程表设置！</div>
+
+    </div>
+    <div class="hasclass" style="display: none;">
+        <div class="dx-coursesel cl">
+            <label class="lab">
+                选择班级：
+            </label>
+            <div class="classlist">
+                #foreach($item in $classlist)
+                    <span data-id="$!item.id" class="classitem #if($!item.id==$!selid) sel#end">
+                        <a href="course?classid=$!item.id">$item.name</a>
+                        #if($!item.id==$!selid)
+                        <span class="selicon Hui-iconfont Hui-iconfont-selected"></span>
+                        #end
+                    </span>
+                #end
+            </div>
+        </div>
+        <div class="coursebox">
+            <table class="coursetable">
+                <thead>
+                    <tr>
+                        <th>周一</th>
+                        <th>周二</th>
+                        <th>周三</th>
+                        <th>周四</th>
+                        <th>周五</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">早上</td>
+                    </tr>
+                    #foreach($lesson in [1,2,3,4])
+                        <tr class="coursetable-tr">
+                            #foreach($day in [1,2,3,4,5])
+                                <td data-val="${lesson}_${day}">
+                                    <div class="J_courseitem">
+                                        <span class="J_coursename">&nbsp;</span>
+                                    </div>
+                                </td>
+                            #end
+                        </tr>
+                    #end
+                    <tr>
+                        <td colspan="5">下午</td>
+                    </tr>
+                    #foreach($lesson in [5,6,7,8])
+                    <tr class="coursetable-tr">
+                        #foreach($day in [1,2,3,4,5])
+                            <td data-val="${lesson}_$day">
+                                <div class="J_courseitem">
+                                    <span class="J_coursename">&nbsp;</span>
+                                </div>
+                            </td>
+                        #end
+                    </tr>
+                    #end
+                </tbody>
+            </table>
+
+            <div class="btnopbox">
+
+                <a class="J_startedit btn btn-warning radius size-L" href="javascript:;">开始编辑</a>
+                <a class="J_startsave btn btn-success radius size-L" style="display: none;" href="javascript:;">更新并保存</a>
+            </div>
+        </div>
+    </div>
+</div>

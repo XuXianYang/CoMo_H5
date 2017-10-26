@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>教师首页</title>
+    <link href='./css/hui/H-ui.reset.css' rel='stylesheet' type='text/css'/>
+    <link href='./css/hui/H-ui.min.css' rel='stylesheet' type='text/css'>
+    <link href="./css/hui/iconfont/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href='./css/base.css' rel='stylesheet' type='text/css'>
+    <script src='./lib/jquery/jquery-1.8.0.min.js' type='text/javascript'></script>
+    <script src='./lib/hui/H-ui.js' type='text/javascript'></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-wrap">
+        <div class="logo"></div>
+        <div class="header-date">
+            <div>今天是：</div>
+            <div>2016年11月08日</div>
+            <div class="week">星期二</div>
+        </div>
+        <div class="header-user">
+            <span>欢迎您：</span>
+            <span>刘老师1999</span>
+        </div>
+    </div>
+</div>
+<div class="dx-slide">
+    <ul class="left-menu">
+        <li class="active" page-name="my-publish">
+            <a href="#"><i class="Hui-iconfont Hui-iconfont-fabu"></i>我的发布</a>
+        </li>
+        <li page-name="my-class">
+            <a href="#"><i class="Hui-iconfont Hui-iconfont-usergroup2"></i>我的班级</a>
+        </li>
+        <li page-name="my-reciever">
+            <a href="#"><i class="Hui-iconfont Hui-iconfont-email"></i>收件箱</a>
+        </li>
+        <li page-name="my-sent">
+            <a href="#"><i class="Hui-iconfont Hui-iconfont-zhuanfa"></i>已发送</a>
+        </li>
+
+    </ul>
+</div>
+
+<div class="dx-content">
+    <div class="dx-con">
+			<div class="dx-conwrap">
+					<div class="dx-toptab">
+							<ul>
+									<li class="active"><a href="#">发布课件</a></li>
+									<li><a href="#">发布作业</a></li>
+									<li><a href="#">发布成绩</a></li>
+									<li><a href="#">班级公告</a></li>
+									<li><a href="#">课程表</a></li>
+							</ul>
+					</div>
+					<div class="dx-subtab">
+							<ul>
+									<li class="active">
+											<a>发布课件</a>
+									</li>
+									<li>
+											<a>已发布</a>
+									</li>
+							</ul>
+					</div>
+
+
+					<div>
+							<style>
+									.dx-col{padding: 8px 0;}
+									.dx-col .f-lab{ width: 130px; float: left;min-height: 10px;
+									line-height: 28px; font-size: 14px; text-align: right; margin-right: 10px;}
+									.dx-col .f-con{float:left; width: 500px;}
+									.dx-col .dx-check{ margin-right: 10px; line-height: 28px;}
+									.dx-col .dx-check input{ margin-right: 3px;}
+									.dx-col .dx-select{line-height: 28px;}
+							</style>
+							<form method="post" enctype="multipart/form-data">
+									<div class="dx-col cl">
+											<label class="f-lab">
+													收件人：
+											</label>
+											<div class="f-con">
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+													<label class="dx-check">
+															<input type="checkbox" />初三1班
+													</label>
+											</div>
+									</div>
+
+									<div class="dx-col cl">
+											<label class="f-lab">
+													类型：
+											</label>
+											<div class="f-con">
+													<div class="dx-select">
+															<select>
+																	<option>请选择课件类型</option>
+																	<option>1</option>
+																	<option>2</option>
+																	<option>3</option>
+															</select>
+													</div>
+
+											</div>
+									</div>
+									<div class="dx-col cl">
+											<label class="f-lab">
+													标题：
+											</label>
+											<div class="f-con">
+													<input type="text" maxlength="20" class="input-text" placeholder="请输入标题，20字以内">
+											</div>
+									</div>
+									<div class="dx-col cl">
+											<label class="f-lab">
+													内容：
+											</label>
+											<div class="f-con">
+													<textarea class="textarea" placeholder="请输入内容，100字以内"></textarea>
+											</div>
+									</div>
+									<div class="dx-col cl">
+											<label class="f-lab">
+													课件：
+											</label>
+											<div class="f-con">
+													<span class="btn-upload form-group">
+															<input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly="">
+															<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont"></i> 浏览文件</a>
+															<input type="file" multiple="" name="file-1" class="input-file">
+													</span>
+											</div>
+									</div>
+									<div class="dx-col cl">
+											<label class="f-lab">
+											</label>
+											<div class="f-con">
+													<input class="btn radius btn-warning" type="button" value="立即发布">
+											</div>
+									</div>
+							</form>
+
+					</div>
+			</div>
+    </div>
+</div>
+</body>
+</html>

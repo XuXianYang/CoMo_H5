@@ -1,0 +1,27 @@
+##<div class="header">
+##    <div class="wrapper">
+##            <div class="left">
+##                <div class="ui container menu">
+##                    <a class="item">学校</a>
+##                    <a class="item">学校管理员</a>
+##                </div>
+##            </div>
+##            <div class="right ui menu">
+##                <a class="item active">退出</a>
+##            </div>
+##    </div>
+##</div>
+##<div class="header">
+##    <div class="ui item menu">
+##        <a class="item">学校</a>
+##        <a class="item">学校管理员</a>
+##    </div>
+##</div>
+<div id="header" class="ui">
+    <div class="ui inverted vertical segment blue">
+        <div class="ui container inverted pointing menu blue borderless">
+            <a class="header item" href="${contextPath}${servletPath}/sysadmin/school/list">学校</a>
+            <a class="header item" href="${contextPath}${servletPath}/sysadmin/schooladmin/list">学校管理员</a>
+        </div>
+    </div>
+</div>

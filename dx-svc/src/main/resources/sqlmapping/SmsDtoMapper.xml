@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dianxian.sms.dao.SmsDtoMapper">
+  <resultMap id="BaseResultMap" type="com.dianxian.sms.dto.SmsDto">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="mobile_no" jdbcType="VARCHAR" property="mobileNo" />
+    <result column="app_key" jdbcType="VARCHAR" property="appKey" />
+    <result column="sms_template_id" jdbcType="VARCHAR" property="smsTemplateId" />
+    <result column="sms_request" jdbcType="VARCHAR" property="smsRequest" />
+    <result column="sms_response" jdbcType="VARCHAR" property="smsResponse" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, mobile_no, app_key, sms_template_id, sms_request, sms_response, status, created_at, 
+    updated_at
+  </sql>
+  <select id="selectByExample" parameterType="com.dianxian.sms.dto.SmsDtoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sms
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sms
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sms
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dianxian.sms.dto.SmsDtoExample">
+    delete from sms
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.sms.dto.SmsDto">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sms (mobile_no, app_key, sms_template_id, 
+      sms_request, sms_response, status, 
+      created_at, updated_at)
+    values (#{mobileNo,jdbcType=VARCHAR}, #{appKey,jdbcType=VARCHAR}, #{smsTemplateId,jdbcType=VARCHAR}, 
+      #{smsRequest,jdbcType=VARCHAR}, #{smsResponse,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dianxian.sms.dto.SmsDto">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sms
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mobileNo != null">
+        mobile_no,
+      </if>
+      <if test="appKey != null">
+        app_key,
+      </if>
+      <if test="smsTemplateId != null">
+        sms_template_id,
+      </if>
+      <if test="smsRequest != null">
+        sms_request,
+      </if>
+      <if test="smsResponse != null">
+        sms_response,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null">
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="smsTemplateId != null">
+        #{smsTemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="smsRequest != null">
+        #{smsRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="smsResponse != null">
+        #{smsResponse,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dianxian.sms.dto.SmsDtoExample" resultType="java.lang.Integer">
+    select count(*) from sms
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sms
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.mobileNo != null">
+        mobile_no = #{record.mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appKey != null">
+        app_key = #{record.appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsTemplateId != null">
+        sms_template_id = #{record.smsTemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsRequest != null">
+        sms_request = #{record.smsRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsResponse != null">
+        sms_response = #{record.smsResponse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sms
+    set id = #{record.id,jdbcType=BIGINT},
+      mobile_no = #{record.mobileNo,jdbcType=VARCHAR},
+      app_key = #{record.appKey,jdbcType=VARCHAR},
+      sms_template_id = #{record.smsTemplateId,jdbcType=VARCHAR},
+      sms_request = #{record.smsRequest,jdbcType=VARCHAR},
+      sms_response = #{record.smsResponse,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.sms.dto.SmsDto">
+    update sms
+    <set>
+      <if test="mobileNo != null">
+        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null">
+        app_key = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="smsTemplateId != null">
+        sms_template_id = #{smsTemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="smsRequest != null">
+        sms_request = #{smsRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="smsResponse != null">
+        sms_response = #{smsResponse,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.sms.dto.SmsDto">
+    update sms
+    set mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      app_key = #{appKey,jdbcType=VARCHAR},
+      sms_template_id = #{smsTemplateId,jdbcType=VARCHAR},
+      sms_request = #{smsRequest,jdbcType=VARCHAR},
+      sms_response = #{smsResponse,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    
+</mapper>

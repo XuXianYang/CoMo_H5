@@ -1,0 +1,104 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "课件列表 － 我的发布")
+#set($styles = ["teacher/my-publishment.css", "teacher/my-publishment-courseware.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js","teacher/my-publishment.js", "teacher/courseware.js"])
+
+<div class="dx-conwrap">
+    #set($toptab="courseware")
+    #parse("teacher/module/toptab.vm")
+    <div class="dx-subtab">
+        <ul>
+            <li class="active">
+                <a href="#">发布课件</a>
+            </li>
+            <li>
+                <a href="${contextPath}/web/teacher/courseware/list">已发布</a>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <form class="form form-add-courseware" method="post" enctype="multipart/form-data">
+            <div class="dx-col cl">
+                <label class="f-lab">
+                    收件人：
+                </label>
+                <div id='reciever-selection' class="f-con btn-selector-group"
+                  data-value="$!{joinedClasses[0].id}"
+                  data-type="radio">
+                  #foreach($theClass in $joinedClasses)
+            				<a href="javascript:void(0);" class="btn btn-selector"
+            					data-value="${theClass.id}">${theClass.name}</a>
+            			#end
+                </div>
+            </div>
+
+            <div class="dx-col cl">
+                <label class="f-lab">
+                    类型：
+                </label>
+                <div id='type-selection' class="f-con btn-selector-group"
+                  data-value="3"
+                  data-type="radio">
+                  ##材料类型. 1->预习向导， 2->课堂笔记，3->课件
+                  <a href="javascript:void(0);" class="btn btn-selector"
+                    data-value="1">预习向导</a>
+                  <a href="javascript:void(0);" class="btn btn-selector"
+                    data-value="2">课堂笔记</a>
+                  <a href="javascript:void(0);" class="btn btn-selector"
+                    data-value="3">课件</a>
+                </div>
+            </div>
+            <div class="dx-col cl">
+                <label class="f-lab">
+                    标题：
+                </label>
+                <div class="f-con">
+                    <input id="title-input" type="text" maxlength="20" class="input-text" placeholder="请输入标题，20字以内">
+                </div>
+            </div>
+            <div class="dx-col cl">
+                <label class="f-lab">
+                    内容：
+                </label>
+                <div class="f-con">
+                    <textarea id="content-input" class="textarea" placeholder="请输入内容，100字以内"></textarea>
+                </div>
+            </div>
+            <div class="dx-col cl">
+                <label class="f-lab">
+                    课件：
+                </label>
+                <div class="f-con">
+                  <span class="btn-upload form-group">
+                      <input id="input-courseware" class="input-text upload-url radius" type="text" >
+                      <a href="javascript:void();" class="btn btn-primary radius upload-btn courseware-fileupload"><i class="Hui-iconfont"></i> 浏览文件</a>
+                      <input type="file" name="file" class="input-file courseware-fileupload">
+                  </span>
+                <!--
+                  <div
+                    id="courseware-dropzone"
+                    action="/upload"
+                    class="dropzone needsclick dz-clickable"
+                    data-dz-max-files="1">
+                    <div class="dz-message needsclick">
+                      拖放文件到此处或点击上传。<br>
+                      <span class="note needsclick">上传文件支持word和excel。</span>
+                    </div>
+                    <div class="fallback">
+                    </div>
+                  </div>
+                  -->
+                </div>
+            </div>
+            <div class="dx-col cl">
+                <label class="f-lab">
+                </label>
+                <div class="f-con">
+                    <input class="btn radius btn-publish-courseware" type="button" value="立即发布">
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

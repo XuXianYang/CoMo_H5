@@ -1,0 +1,2 @@
+INSERT INTO `resource_file` (`id`, `bucket`, `url_prefix`, `relative_path`, `category`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+	(1, 'uuuuu', 'http://o86e356yw.bkt.clouddn.com', 'user/1/avatar', 'AVATAR', NULL, NULL, now(), NULL);

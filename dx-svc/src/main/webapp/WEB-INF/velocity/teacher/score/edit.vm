@@ -1,0 +1,36 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "编辑考试成绩 － 我的发布")
+#set($styles = ["teacher/my-publishment.css", "teacher/my-publishment-score.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/common.js","teacher/my-publishment.js", "teacher/score.js"])
+#set($libstyles = ["handsontable/0.28.0/handsontable.full.min.css"])
+#set($libscripts = ["handsontable/0.28.0/handsontable.full.min.js"])
+
+
+<div class="dx-conwrap">
+    #set($toptab="score")
+    #parse("teacher/module/toptab.vm")
+    <div class="dx-subtab">
+        <ul>
+            <li class="active">
+                <a>发布成绩</a>
+            </li>
+            <li>
+               <a href="${contextPath}/web/teacher/score/list">已发布</a>
+            </li>
+        </ul>
+    </div>
+    <div class="quiz-title">$!{currentCourseQuiz.quiz.name} - $!{currentCourseQuiz.course.name}</div>
+	<div id="score-list" class="score-list"></div>
+	<div class="dx-col cl btn-publish-score-wrapper">
+         <label class="f-lab">
+         </label>
+         <div class="f-con">
+             <input class="btn radius btn-publish-score" type="button" value="立即发布">
+         </div>
+     </div>
+	<input id="can-edit-input" type="hidden" value="true">
+	<script id="students-json-input" type="type/json">$!students</script>
+	<script id="scores-json-input" type="type/json">$!scores</script>
+    <input id="class-input" type="hidden" value="$!currentClass.id">
+    <input id="quiz-input" type="hidden" value="$!currentCourseQuiz.quiz.id">
+</div>

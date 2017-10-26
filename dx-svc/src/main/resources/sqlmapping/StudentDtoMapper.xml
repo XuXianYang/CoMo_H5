@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.user.dao.StudentDtoMapper" >
+    <resultMap id="BaseResultMap" type="com.dianxian.user.dto.StudentDto" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="school_id" property="schoolId" jdbcType="BIGINT" />
+        <result column="enrol_year" property="enrolYear" jdbcType="INTEGER" />
+        <result column="class_number" property="classNumber" jdbcType="INTEGER" />
+        <result column="class_id" property="classId" jdbcType="BIGINT" />
+        <result column="join_class_at" property="joinClassAt" jdbcType="TIMESTAMP" />
+        <result column="student_no" property="studentNo" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="expected_at_home_time" property="expectedAtHomeTime" jdbcType="TIMESTAMP" />
+        <result column="expected_at_home_time_buffer" property="expectedAtHomeTimeBuffer" jdbcType="TIME" />
+        <result column="expected_at_home_timeout" property="expectedAtHomeTimeout" jdbcType="TIMESTAMP" />
+        <result column="expected_at_home_time_update_at" property="expectedAtHomeTimeUpdateAt" jdbcType="TIMESTAMP" />
+        <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+        <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.dianxian.user.dto.StudentDto" extends="BaseResultMap" >
+        <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, user_id, school_id, enrol_year, class_number, class_id, join_class_at, student_no,
+        code, expected_at_home_time, expected_at_home_time_buffer, expected_at_home_timeout,
+        expected_at_home_time_update_at, created_by, updated_by, created_at, updated_at
+    </sql>
+    <sql id="Blob_Column_List" >
+    description
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from student
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from student
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.user.dto.StudentDto" useGeneratedKeys="true" keyProperty="id" >
+    insert into student (user_id, school_id, enrol_year, class_number,
+      class_id, student_no, code,  created_at, description
+      )
+    values (#{userId,jdbcType=BIGINT}, #{schoolId,jdbcType=BIGINT}, #{enrolYear}, #{classNumber},
+      #{classId,jdbcType=BIGINT}, #{studentNo,jdbcType=VARCHAR},
+      #{code,jdbcType=VARCHAR}, now(), #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.dianxian.user.dto.StudentDto" >
+    update student
+    set user_id = #{userId,jdbcType=BIGINT},
+    school_id = #{schoolId,jdbcType=BIGINT},
+    class_id = #{classId,jdbcType=BIGINT},
+
+    student_no = #{studentNo,jdbcType=VARCHAR},
+    code = #{code,jdbcType=VARCHAR},
+    created_by = #{createdBy,jdbcType=BIGINT},
+    updated_by = #{updatedBy,jdbcType=BIGINT},
+    created_at = #{createdAt,jdbcType=TIMESTAMP},
+    updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+    expected_at_home_time = #{expectedAtHomeTime,jdbcType=TIMESTAMP},
+    expected_at_home_time_buffer = #{expectedAtHomeTimeBuffer,jdbcType=TIMESTAMP},
+    expected_at_home_time_update_at = #{expectedAtHomeTimeUpdateAt,jdbcType=TIMESTAMP},
+    expected_at_home_timeout = #{expectedAtHomeTimeout,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+</update>
+
+    <update id="updateWarningTimeById" parameterType="com.dianxian.user.dto.StudentDto" >
+        update student
+        set expected_at_home_time = #{expectedAtHomeTime,jdbcType=TIMESTAMP},
+        expected_at_home_time_buffer = #{expectedAtHomeTimeBuffer,jdbcType=TIMESTAMP},
+        expected_at_home_time_update_at = #{expectedAtHomeTimeUpdateAt,jdbcType=TIMESTAMP},
+        expected_at_home_timeout = #{expectedAtHomeTimeout,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from student
+        where user_id = #{userId}
+    </select>
+    <select id="countByStudentNo" resultType="_int" parameterType="string" >
+        select
+        count(*)
+        from student
+        where student_no = #{studentNo}
+    </select>
+    <select id="countByCode" resultType="_int" parameterType="string" >
+        select
+        count(*)
+        from student
+        where code = #{code}
+    </select>
+
+    <update id="joinClass" parameterType="com.dianxian.user.dto.StudentDto">
+        update student
+        set
+        school_id = #{schoolId,jdbcType=BIGINT},
+        enrol_year = #{enrolYear},
+        class_number = #{classNumber},
+        class_id = #{classId,jdbcType=BIGINT},
+        join_class_at = #{joinClassAt},
+        <if test="updatedBy != null" >
+            updated_by = #{updatedBy,jdbcType=BIGINT},
+        </if>
+        updated_at = now()
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+    <update id="removeFromClass" parameterType="com.dianxian.user.dto.StudentDto">
+        update student
+        set
+        school_id = 0,
+        enrol_year = 0,
+        class_number = 0,
+        class_id = 0,
+        join_class_at = null
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateStudentNo" parameterType="com.dianxian.user.dto.StudentDto">
+        update student
+        set
+        student_no = #{studentNo},
+        <if test="updatedBy != null" >
+            updated_by = #{updatedBy,jdbcType=BIGINT},
+        </if>
+        updated_at = now()
+        where user_id = #{userId}
+    </update>
+    <select id="getByCode" resultMap="ResultMapWithBLOBs" parameterType="string" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from student
+        where code = #{code}
+    </select>
+
+    <select id="getByStudentNo" resultMap="ResultMapWithBLOBs" parameterType="string" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from student
+        where student_no = #{studentNo}
+    </select>
+
+    <select id="getStudentsByIds" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from student
+        where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getStudentsOfClass" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from student
+        where class_id = #{classId}
+    </select>
+    <select id="findUnConfigExceptedHomeTimeStu" resultMap="ResultMapWithBLOBs" parameterType="java.util.Date" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from student
+        where  expected_at_home_time_update_at &lt;  #{dateTime} or expected_at_home_time_update_at is null
+    </select>
+
+    <select id="findStudentTimeout" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from student
+        where  expected_at_home_timeout &lt;  #{dateTime} and expected_at_home_time_update_at &gt; #{midnight}
+    </select>
+</mapper>

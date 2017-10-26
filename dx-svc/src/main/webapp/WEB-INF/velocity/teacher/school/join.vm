@@ -1,0 +1,34 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "加入学校")
+#set($styles = ["teacher/school.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/school/join.js"])
+
+<script type="text/javascript">
+var currentPage = window.currentPage = "my-class";
+</script>
+<div class="dx-conwrap">
+    <div class="dx-top-panel add-class">
+        <div class="title">
+          加入学校
+        </div>
+    </div>
+
+    <form id="form-add-class" class="form form-horizontal form-add-class">
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2">学校：</label>
+        <div id='school-selection' class="formControls col-xs-10 col-sm-10 btn-selector-group"
+          data-type="radio">
+          #foreach($school in $schools)
+						<a href="javascript:void(0);" class="btn btn-selector selected"
+	            data-value="$!school.id:$!school.code">$!school.name</a>
+		  #end
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2"></label>
+        <div class="formControls col-xs-10 col-sm-10">
+            <a id="btn-join-school" class="btn radius btn-join-school disabled" disabled>加入学校</a>
+        </div>
+      </div>
+    </form>
+</div>

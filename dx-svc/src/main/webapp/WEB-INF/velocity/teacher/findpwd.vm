@@ -1,0 +1,48 @@
+#set($layout = "layout/login_layout.vm")
+#set($pageTitle = "找回密码")
+#set($styles = [])
+#set($scripts = ["findpwd.js"])
+
+<div class="lcontent">
+    <div class="contentwrap">
+
+        <div class="registerwrap">
+            <div class="regform">
+                <i class="regicon"></i>
+                <div class="regtitle">
+                    找回密码
+                </div>
+
+                <div class="regformcon">
+                    <div class="col">
+                        <input type="text" autocomplete="off" maxlength="20" id="J_usernamef" class="txt" placeholder="请输入手机号码" />
+                    </div>
+                    <div class="errormsg">
+
+                    </div>
+                    <div class="col" style="width: 300px;">
+                        <input autocomplete="off" style="width: 160px;" type="text" maxlength="7" id="J_yzmf" class="txt" placeholder="请输入手机验证码" />
+                        <a href="javascript:;" class="yzmbtn J_yzmbtn disabled">获取验证码</a>
+                    </div>
+                    <div class="errormsg">
+
+                    </div>
+                    <div class="col">
+                        <input  autocomplete="off" type="password" maxlength="50" id="J_passwordf" class="txt" placeholder="请输入新密码" />
+                    </div>
+                    <div class="errormsg">
+
+                    </div>
+
+                    <div>
+                        <a href="javascript:;" id="J_submit" class="logbtn">确定</a>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

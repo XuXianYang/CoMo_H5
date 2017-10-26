@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+       default-lazy-init="true">
+
+    <context:component-scan base-package="com.dianxian"
+                            name-generator="com.dianxian.core.spring.context.QualifiedBeanNameGenerator"/>
+    <context:annotation-config/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:dx-svc.properties</value>
+                <value>classpath:dx-svc-env.properties</value>
+            </list>
+        </property>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+
+    <bean id="pageExpireDateFilter" class="com.dianxian.core.spring.mvc.filter.ExpireDateFilter" />
+    <bean id="variableConfigrationFilter" class="com.dianxian.core.spring.mvc.filter.VariableConfigurationFilter" />
+
+    <cache:annotation-driven cache-manager="cacheManager"
+                             key-generator="defaultKeyGenerator"
+                             proxy-target-class="true"/>
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcache"></property>
+    </bean>
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"></property>
+    </bean>
+    <bean id="defaultKeyGenerator" class="com.dianxian.core.spring.cache.CacheKeyGenerator"/>
+
+    <bean class="com.dianxian.storage.service.QiniuFileStorage">
+        <constructor-arg name="accessKey" value="${storage.qiniu.key}"/>
+        <constructor-arg name="secretKey" value="${storage.qiniu.secret}"/>
+        <constructor-arg name="bucketName" value="${storage.qiniu.bucket.name}"/>
+        <constructor-arg name="bucketURL" value="${storage.qiniu.bucket.urlPrefix}"/>
+    </bean>
+    <bean  class="com.dianxian.redis.RedisCacheConfig">
+        <constructor-arg name="sentinels" value="${redis.sentinels.url}"/> <!-- sentinesession-cachel集群地址，格式： ip:port;ip:port;ip:port... -->
+        <constructor-arg name="masterName" value="${redis.masterName}"/> <!-- sentinel在sentinel.conf里面配置的masterName，代表一组redis实例  -->
+        <constructor-arg name="prefix" value="session_"/>     <!--  缓存key前缀，根据业务场景设置，比如session可以将前缀设为session -->
+        <property name="password" value="${redis.password}" />    <!-- redis密码，默认没有密码 -->
+        <!-- 以下参数选填 -->
+        <property name="timeout" value="20000" /> <!-- 请求超时时间，单位毫秒，默认2秒 -->
+        <property name="maxTotal" value="10" />  <!-- 连接池最大连接数，默认10 -->
+        <property name="maxIdel" value="8" />    <!-- 连接池最大空闲连接数，默认8 -->
+        <property name="minIdel" value="2" />    <!-- 连接池最小连接数，默认2 -->
+        <property name="blockWhenExhausted" value="true" />  <!-- 连接池满时是否等待，默认等待（true） -->
+        <property name="maxWaitMillis" value="5" />       <!-- 连接池满时的等待时间，单位毫秒，默认5秒 -->
+        <property name="lifo" value="false" />               <!-- 是否使用lifo队列管理连接，默认不使用（false）-->
+        <property name="testOnBorrow" value="false" />       <!-- 是否在获取连接时测试可用性，默认不使用（false）-->
+        <property name="testOnReturn" value="false" />       <!-- 是否在归还连接时测试可用性，默认不使用（false）-->
+        <property name="testWhileIdle" value="true" />       <!-- 是否在连接空闲时测试可用性，默认使用（true）-->
+        <property name="timeBetweenEvictionRunsMillis" value="30" /> <!-- 多久测试空闲连接，单位毫秒，默认30秒 -->
+        <property name="numTestsPerEvictionRun" value="-1" />           <!-- 每次测试的空闲连接数量，默认不限制（-1）-->
+        <property name="minEvictableIdleTimeMillis" value="60" />    <!-- 连接空闲多久被认为idle，单位毫秒，默认60秒 -->
+    </bean>
+    <bean id="userContextProvider" class="com.dianxian.user.filter.SessionTokenProvider"></bean>
+
+    <bean id="userContextFilter" class="com.dianxian.user.filter.UserContextFilter">
+        <property name="userContextProvider" ref="userContextProvider"/>
+    </bean>
+</beans>

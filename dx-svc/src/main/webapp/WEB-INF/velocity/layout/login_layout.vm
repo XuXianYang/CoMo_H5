@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>$pageTitle</title>
+    <link href='${contextPath}/css/hui/H-ui.reset.css' rel='stylesheet' type='text/css'/>
+    <link href='${contextPath}/css/hui/H-ui.min.css' rel='stylesheet' type='text/css'>
+    <link href="${contextPath}/css/hui/iconfont/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="${contextPath}/css/loginreg.css" rel="stylesheet" type="text/css" />
+    #foreach($style in $styles)
+        <link href='${contextPath}/css/$style' rel='stylesheet' type='text/css'>
+    #end
+</head>
+<body>
+    $screen_content
+<div class="footer">
+    <div class="lwrap">
+        <span class="bottom-logo"></span>
+        <span class="copyright">Copyright 2016 by Enreach</span>
+    </div>
+</div>
+<script src='${contextPath}/lib/jquery/jquery-1.8.0.min.js' type='text/javascript'></script>
+<script src='${contextPath}/lib/hui/H-ui.js' type='text/javascript'></script>
+    #parse("global.vm")
+<script type="text/javascript" src="${contextPath}/js/common.js"></script>
+#foreach($script in $scripts)
+<script src='${contextPath}/js/$script' type='text/javascript'></script>
+#end
+</body>
+</html>

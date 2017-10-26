@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" href="css/sm.css">
+        <link rel="stylesheet" href="css/sme.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/my.css">
+        <link rel="stylesheet" href="css/jcrop.css">
+        <title>头像-酷么课堂</title>
+    </head>
+    <body>
+      <div class="page-group">
+        <div class="page page-current dx-common-head">
+          <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left back" href="#">
+              <span class="icon icon-left"></span>
+              设置
+            </a>
+          </header>
+          <div class="content">
+            <input type="file" id="J_file" />
+
+            <style>
+            .upimgbox{margin: 1rem;}
+            .upimgbox img{}
+            </style>
+            <div class="upimgbox">
+              <img style="width:100%;" src="" id="J_upimg" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script>
+        jQuery.noConflict();
+      </script>
+      <script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+      <script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+      <script type='text/javascript' src='js/common.js' charset='utf-8'></script>
+      <script type='text/javascript' src='js/jcrop.js' charset='utf-8'></script>
+      <script>
+      $(function(){
+        $("#J_file").bind("change",function(event){
+          readData(event);
+        });
+      });
+
+      function readData(evt){
+        evt.stopPropagation();
+        evt.preventDefault();
+
+        var uploadInfo = {};
+        var file = evt.dataTransfer !== undefined ? evt.dataTransfer.files[0] : evt.target.files[0];
+        uploadInfo.type = file.type;
+        uploadInfo.name = file.name;
+        var reader = new FileReader();
+        reader.onload = function(e){
+          $("#J_upimg")[0].src = e.target.result;
+          $("#J_upimg")[0].onload = function(){
+            alert(1);
+            jQuery('#J_upimg').Jcrop({
+              bgColor: 'black',
+              allowSelect:false,
+              allowResize:true,
+              aspectRatio:1,
+              bgOpacity: .6,
+              setSelect: [0, 0, 150, 150]
+            });
+          };
+
+        }
+
+
+        reader.readAsDataURL(file);
+
+      }
+
+
+
+      </script>
+    </body>
+</html>

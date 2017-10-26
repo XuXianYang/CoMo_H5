@@ -1,0 +1,70 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "我的学生 － 我的班级")
+#set($styles = ["teacher/class.css"])
+#set($scripts = ["jquery.btn-selector.js", "teacher/class/common.js", "teacher/class/join.js"])
+
+<script type="text/javascript">
+var currentPage = window.currentPage = "my-class";
+</script>
+<div class="dx-conwrap">
+    <div class="dx-top-panel add-class">
+        <div class="title">
+          加入班级
+        </div>
+    </div>
+
+    <form id="form-add-class" class="form form-horizontal form-add-class">
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2">学年：</label>
+        <div id='enroll-year-selection' class="formControls col-xs-10 col-sm-10 btn-selector-group"
+          data-type="radio">
+          #foreach($enrolYear in $enrollYears)
+						<a href="javascript:void(0);" class="btn btn-selector selected"
+	            data-value="$enrolYear">$enrolYear年</a>
+					#end
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2">班级：</label>
+        <div id="class-selection" class="formControls col-xs-10 col-sm-10 btn-selector-group"
+          data-type="checkbox">
+					#foreach($i in [1..27])
+          <a href="javascript:void(0);" class="btn btn-selector selected"
+            data-value="${i}">${i}班</a>
+					#end
+        </div>
+      </div>
+			<!--
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2">入学日期：</label>
+        <div class="formControls col-xs-10 col-sm-10">
+          2015年09月
+        </div>
+      </div>
+			-->
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2">学科：</label>
+        <div id="course-selection"  class="formControls col-xs-10 col-sm-10 btn-selector-group"
+          data-type="checkbox">
+					#foreach($course in $courses)
+	          <a href="javascript:void(0);" class="btn btn-selector selected"
+	            data-value="${course.id}">${course.name}</a>
+					#end
+        </div>
+      </div>
+			<!--
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2">班主任：</label>
+        <div class="formControls col-xs-10 col-sm-10">
+          苏鑫
+        </div>
+      </div>
+			-->
+      <div class="row cl">
+        <label class="form-label col-xs-2 col-sm-2"></label>
+        <div class="formControls col-xs-10 col-sm-10">
+            <a id="btn-join-class" class="btn radius btn-add-class disabled" disabled>加入班级</a> <a href="${contextPath}/web/teacher/" class="btn radius btn-cancel">取消</a>
+        </div>
+      </div>
+    </form>
+</div>

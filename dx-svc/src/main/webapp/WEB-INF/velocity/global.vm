@@ -1,0 +1,7 @@
+<script type="text/javascript">
+    var Global = {};
+    Global.contextPath = "${contextPath}";
+    Global.servletPath = "${servletPath}";
+    Global.requestURL = "${requestURL}";
+    Global.requestURI = "${requestURI}";
+</script>

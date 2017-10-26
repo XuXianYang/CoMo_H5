@@ -1,0 +1,52 @@
+#set($layout = "layout/sysadmin_layout.vm")
+#set($pageTitle = "学校管理员列表")
+#set($scripts = ["js/sysadmin/school_admin_list.js"])
+<input type="hidden" id="currentPage" value="${data.pageNum}">
+<input type="hidden" id="pageCount" value="${data.pages}">
+<div class="main-wide-wrap">
+    <div class="page-title">
+        $pageTitle
+    </div>
+    <div>
+        <a href="${contextPath}${servletPath}/sysadmin/schooladmin/create" class="ui teal button">创建学校管理员</a>
+    </div>
+    <table class="ui celled striped table">
+        <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+                <th>姓名</th>
+                <th>手机号码</th>
+                <th>学校</th>
+##                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            #foreach($item in $data.list)
+            <tr>
+                <td>
+                    $!{item.userId}
+                </td>
+                <td>
+                    $!{item.userName}
+                </td>
+                <td>
+                    $!{item.realName}
+                </td>
+                <td>
+                    $!{item.mobile}
+                </td>
+                <td>
+                    $!{item.schoolName}
+                </td>
+            </tr>
+            #end
+        </tbody>
+        <tfoot>
+        <tr><th colspan="5">
+            <div id="paging-container" class="ui right floated pagination menu">
+            </div>
+        </th>
+        </tr></tfoot>
+    </table>
+</div>

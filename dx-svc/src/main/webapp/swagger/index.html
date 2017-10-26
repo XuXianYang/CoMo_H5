@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>API Doc</title>
+  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+  <link href='lib/jquery/jquery-ui.min.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='lib/semantic/semantic.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
+  <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
+  <link href='lib/jquery/jsoneditor.css' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        .supercontainer {
+            min-height:100%; /*使内容高度和body一样*/
+            margin-bottom:-100px;/*向上缩减80像素，不至于footer超出屏幕可视范围*/
+        }
+
+        .seprator{
+
+            padding-bottom: 100px;
+            height: auto!important;/* height优先级 */
+            clear:both;
+        }
+    </style>
+    <script src='lib/jquery/jquery-1.8.0.min.js' type='text/javascript'></script>
+    <script src='lib/jquery/jquery.slideto.min.js' type='text/javascript'></script>
+    <script src='lib/jquery/jquery.wiggle.min.js' type='text/javascript'></script>
+    <script src='lib/jquery/jquery.ba-bbq.min.js' type='text/javascript'></script>
+    <script src='lib/jquery/jquery-ui.min.js' type='text/javascript'></script>
+    <script src='lib/jquery/jquery.jsoneditor.js' type='text/javascript'></script>
+
+
+    <script src='lib/handlebars-2.0.0.js' type='text/javascript'></script>
+    <script src='lib/underscore-min.js' type='text/javascript'></script>
+    <script src='lib/backbone-min.js' type='text/javascript'></script>
+    <script src='lib/swagger/swagger-ui.js' type='text/javascript'></script>
+    <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
+    <script src='lib/jsoneditor.min.js' type='text/javascript'></script>
+    <script src='lib/marked.js' type='text/javascript'></script>
+    <script src='lib/swagger/swagger-oauth.js' type='text/javascript'></script>
+    <script src='lib/lodash.min.js' type='text/javascript'></script>
+    <!-- Some basic translations -->
+    <script src='lang/translator.js' type='text/javascript'></script>
+    <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
+    <script src='lang/zh-cn.js' type='text/javascript'></script>
+    <script src='lib/layer/layer.js' type='text/javascript'></script>
+    <script src='lib/editorInLayer.js' type='text/javascript'></script>
+    <script src="lib/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body class="swagger-section" style="font-family: Microsoft YaHei">
+  <div class="topwrapper supercontainer">
+ <div id="ltsnav" class="ui">
+    <!--<div data-reactroot="" class="ui inverted vertical segment blue">-->
+        <!--<div class="ui container inverted pointing menu blue borderless">-->
+            <!--<a class="header item" href="index.html">API Doc Center</a>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+      <div id='header'>
+          <div class="swagger-ui-wrap">
+              <a id="logo" href="http://swagger.io"><img class="logo__img" alt="swagger" height="30" width="30" src="images/logo_small.png" /><span class="logo__title">swagger</span></a>
+              <!--<form id='api_selector'>-->
+                  <!--<div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>-->
+                  <!--<div id='auth_container'></div>-->
+                  <!--<div class='input'><a id="explore" class="header__btn" href="#" data-sw-translate>Explore</a></div>-->
+              <!--</form>-->
+          </div>
+      </div>
+<div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
+<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+
+<div class="seprator"></div>
+</div>
+
+<div id="hideEditorArea" style="display:none;height:90%">
+  <div id="jsonMateEditor" class='json-editor' style=" width:55%;font-family:Microsoft YaHei;float:left">
+    <div id="jsonMateName">
+    </div>
+  </div>
+  <div class='json-editor' style="width:35%; height:100%; float:left">
+    <div>
+      修改结果
+    </div>
+    <div id="aceEditor" style="width:100%; height: 100%"></div>
+  </div>
+</div>
+  <script type="text/javascript">
+
+      $(function () {
+          var pathname = window.location.pathname;
+          pathname = pathname.split("/");
+          pathname.pop();
+          pathname.pop();
+          pathname = pathname.join("/");
+          var url = window.location.origin + pathname + '/service/swagger.json';
+
+          window.swaggerUi = new SwaggerUi({
+              dom_id: "swagger-ui-container",
+              url: url,
+              validatorUrl: null,
+              supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+              onComplete: function(swaggerApi, swaggerUi){
+                  if(typeof initOAuth == "function") {
+                      initOAuth({
+                          clientId: "your-client-id",
+                          clientSecret: "your-client-secret-if-required",
+                          realm: "your-realms",
+                          appName: "your-app-name",
+                          scopeSeparator: ",",
+                          additionalQueryStringParams: {}
+                      });
+                  }
+
+                  if(window.SwaggerTranslator) {
+                      window.SwaggerTranslator.translate();
+                  }
+
+                  $('pre code').each(function(i, e) {
+                      hljs.highlightBlock(e)
+                  });
+
+//          addApiKeyAuthorization();
+              },
+              onComplete : promptLayer.initPopUp,
+              onFailure: function(data) {
+                  log("Unable to Load SwaggerUI");
+              },
+              docExpansion: "none",
+              jsonEditor: false,
+              apisSorter: "alpha",
+              defaultModelRendering: 'model',
+              showRequestHeaders: true
+          });
+
+//      function addApiKeyAuthorization(){
+//        var key = encodeURIComponent($('#input_apiKey')[0].value);
+//        if(key && key.trim() != "") {
+//            var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
+//            window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
+//            log("added key " + key);
+//        }
+//      }
+
+//      $('#input_apiKey').change(addApiKeyAuthorization);
+
+          // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
+          /*
+           var apiKey = "myApiKeyXXXX123456789";
+           $('#input_apiKey').val(apiKey);
+           */
+
+          function log() {
+              if ('console' in window) {
+                  console.log.apply(console, arguments);
+              }
+          }
+
+          window.swaggerUi.load();
+      });
+  </script>
+</body>
+</html>

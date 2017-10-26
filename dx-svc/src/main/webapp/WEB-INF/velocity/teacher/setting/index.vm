@@ -1,0 +1,45 @@
+#set($layout = "layout/teacher_layout.vm")
+#set($pageTitle = "设置 － 点线")
+#set($styles = ["teacher/homework.css"])
+#set($scripts = ["teacher/my-setting.js"])
+
+<div class="dx-conwrap">
+        <div class="dx-col cl">
+            <label class="f-lab">
+                所在学校：
+            </label>
+            <div class="f-con">
+                <span style="line-height: 24px;">$!teacherinfo.teacherInfo.schoolName</span>
+            </div>
+        </div>
+        <div class="dx-col cl">
+            <label class="f-lab">
+                姓名：
+            </label>
+            <div class="f-con">
+                <input id="J_realname" style="width: 120px;" type="text" value="$!teacherinfo.realName"
+                       maxlength="20" class="input-text" placeholder="请输入姓名">
+                <div class="errormsg"></div>
+            </div>
+        </div>
+
+        <div class="dx-col cl">
+            <label class="f-lab">
+                手机号：
+            </label>
+            <div class="f-con">
+                <span style="line-height: 24px;">$!teacherinfo.mobileNo</span>
+            </div>
+        </div>
+
+
+        <div class="dx-col cl">
+            <label class="f-lab">
+            </label>
+            <div class="f-con">
+                <input class="btn radius btn-warning" id="J_save" type="button" value="保存">
+
+            </div>
+        </div>
+
+</div>

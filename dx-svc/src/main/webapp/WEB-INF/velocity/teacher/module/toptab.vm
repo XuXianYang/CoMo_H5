@@ -1,0 +1,9 @@
+<div class="dx-toptab">
+    <ul>
+        <li #if ($toptab == "courseware") class="active" #end><a href="${contextPath}${servletPath}/teacher/courseware/list">发布课件</a></li>
+        <li #if ($toptab == "homework") class="active" #end><a href="${contextPath}${servletPath}/teacher/homework">发布作业</a></li>
+        <li #if ($toptab == "score") class="active" #end><a href="${contextPath}${servletPath}/teacher/score">发布成绩</a></li>
+        <li #if ($toptab == "notice") class="active" #end><a href="${contextPath}${servletPath}/teacher/notice">班级公告</a></li>
+        <li #if ($toptab == "course") class="active" #end ><a href="${contextPath}${servletPath}/teacher/course">课程表</a></li>
+    </ul>
+</div>

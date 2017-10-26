@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dianxian.school.dao.QuizDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.dianxian.school.dto.QuizDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="school_id" property="schoolId" jdbcType="BIGINT" />
+    <result column="enrol_year" property="enrolYear" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+      <result column="category" property="category" jdbcType="INTEGER" />
+      <result column="study_year" property="studyYear" jdbcType="INTEGER" />
+      <result column="study_term" property="studyTerm" jdbcType="INTEGER" />
+      <result column="study_month" property="studyMonth" jdbcType="INTEGER" />
+
+      <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dianxian.school.dto.QuizDto" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, course_id, school_id, enrol_year, category, study_year, study_term, study_month, start_time, end_time, created_by, updated_by,
+    created_at, updated_at
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from quiz
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from quiz
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dianxian.school.dto.QuizDto" useGeneratedKeys="true" keyProperty="id" >
+    insert into quiz (name, course_id,
+      school_id, enrol_year, start_time,
+      end_time, category, study_year, study_term, study_month, created_by,
+      created_at, description
+      )
+    values (#{name,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT},
+      #{schoolId,jdbcType=BIGINT}, #{enrolYear,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{category}, #{studyYear}, #{studyTerm}, #{studyMonth},
+      #{createdBy,jdbcType=BIGINT},
+      now(), #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dianxian.school.dto.QuizDto" >
+        update quiz
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="courseId != null" >
+                course_id = #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="schoolId != null" >
+                school_id = #{schoolId,jdbcType=BIGINT},
+            </if>
+            <if test="enrolYear != null" >
+                enrol_year = #{enrolYear,jdbcType=INTEGER},
+            </if>
+            <if test="category != null" >
+                category = #{category,jdbcType=INTEGER},
+            </if>
+            <if test="studyYear != null" >
+                study_year = #{studyYear,jdbcType=INTEGER},
+            </if>
+            <if test="studyTerm != null" >
+                study_term = #{studyTerm,jdbcType=INTEGER},
+            </if>
+            <if test="studyMonth != null" >
+                study_month = #{studyMonth,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null" >
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null" >
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null" >
+                created_by = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedBy != null" >
+                updated_by = #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="createdAt != null" >
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null" >
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dianxian.school.dto.QuizDto" >
+        update quiz
+        set name = #{name,jdbcType=VARCHAR},
+        course_id = #{courseId,jdbcType=BIGINT},
+        school_id = #{schoolId,jdbcType=BIGINT},
+        enrol_year = #{enrolYear,jdbcType=INTEGER},
+        category = #{category,jdbcType=INTEGER},
+        study_year = #{studyYear,jdbcType=INTEGER},
+        study_term = #{studyTerm,jdbcType=INTEGER},
+        study_month = #{studyMonth,jdbcType=INTEGER},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+        created_by = #{createdBy,jdbcType=BIGINT},
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+        description = #{description,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dianxian.school.dto.QuizDto" >
+    update quiz
+    set name = #{name,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=BIGINT},
+      school_id = #{schoolId,jdbcType=BIGINT},
+      enrol_year = #{enrolYear,jdbcType=INTEGER},
+      category = #{category,jdbcType=INTEGER},
+      study_year = #{studyYear,jdbcType=INTEGER},
+      study_term = #{studyTerm,jdbcType=INTEGER},
+      study_month = #{studyMonth,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="getRecentQuizes" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from quiz
+        where school_id = #{schoolId} and enrol_year = #{enrolYear}
+        <![CDATA[    and datediff(start_time, now()) < 7 and datediff(start_time, now()) >=0 ]]>
+    </select>
+    <select id="getCourseQuizOfClass" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from quiz
+        where school_id = #{schoolId} and enrol_year = #{enrolYear}
+        order by start_time desc
+    </select>
+    <select id="getQuizOfScoreReport" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from quiz
+        where school_id = #{schoolId} and enrol_year = #{enrolYear} and study_year = #{studyYear} and study_term = #{studyTerm} and category = #{category}
+        order by start_time desc
+    </select>
+
+    <select id="getLatestQuiz" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from quiz
+        where school_id = #{schoolId} and enrol_year = #{enrolYear} and study_year = #{studyYear} and category = #{category} and course_id = #{courseId}
+        order by start_time desc limit 0, 1
+    </select>
+
+    <select id="getCourseQuizOfClassByStudyYear" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from quiz
+        where school_id = #{schoolId} and enrol_year = #{enrolYear} and study_year = #{studyYear} and course_id = #{courseId}
+        order by start_time desc
+    </select>
+
+    <select id="getQuizOfSchool" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from quiz
+        where school_id = #{schoolId}
+        order by id desc
+    </select>
+
+    <select id="getQuizOfClassByCourse" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from quiz
+        where school_id = #{schoolId} and enrol_year = #{enrolYear}
+        and course_id in
+        <foreach close=")" collection="courseIds" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+        order by start_time desc
+    </select>
+</mapper>

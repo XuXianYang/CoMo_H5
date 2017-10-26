@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/sm.css">
+    <link rel="stylesheet" href="css/sme.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/my.css">
+    <title>设置-酷么课堂</title>
+</head>
+<body>
+<div class="page-group">
+<div class="page page-current dx-common-head">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left" external href="my.html">
+            <span class="icon icon-left"></span>
+            设置
+        </a>
+    </header>
+    <div class="content">
+        <div class="card">
+            <div class="card-content">
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <a href="#modifypsd" class="item-link item-content">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">修改密码</div>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <a href="#safe" class="item-link item-content">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">安全设置</div>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <div class="list-block">
+                    <ul>
+                        <!-- <li>
+                          <a href="#" class="item-link item-content">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title">意见反馈</div>
+                            </div>
+                          </a>
+                        </li> -->
+                        <li>
+                            <a href="#aboutus" class="item-link item-content">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">关于我们</div>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content-block">
+            <p><a href="#" external class="button button-big button-fill J_logout">退出 </a></p>
+        </div>
+    </div>
+</div>
+
+<div class="page dx-common-head" id="modifypsd">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="#">
+            <span class="icon icon-left"></span>
+            修改密码
+        </a>
+    </header>
+    <div class="content">
+
+
+        <div class="content-block">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="password" class="J_oldpsd" placeholder="请输入旧的登录密码">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="password" class="J_newpsd" placeholder="请输入新的登录密码">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <p><a href="javascript:;" class="button button-big button-fill J_modifyPsd">确定 </a></p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="page dx-common-head" id="safe">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+    </header>
+    <div class="content">
+
+
+        <div class="content-block">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">预计到家时间</div>
+                                <div class="item-input">
+                                    <input type="text" class="J_expectTime" placeholder="请选择">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">误差时间</div>
+                                <div class="item-input">
+                                    <input value="0分钟" type="text" class="J_timeout" placeholder="请选择">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <p><a href="javascript:;" class="button button-big button-fill J_safeBtn">确定 </a></p>
+        </div>
+
+    </div>
+</div>
+
+<div class="page dx-common-head" id="aboutus">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="#">
+            <span class="icon icon-left"></span>
+            关于我们
+        </a>
+    </header>
+    <div class="content">
+        <div class="dx-about-us">
+            <span class="dx-about-logo"></span>
+            <span class="dx-version">学生端 V1.0.1</span>
+
+            <div class="dx-info-con" style="padding-left: 2.5rem">
+                <div class="infocol">
+                    <span class="infolab">官方网站：</span>
+                    <a href="http://comoclass.com">http://comoclass.com</a>
+                </div>
+                <div class="infocol" style="margin-bottom: -26px;">
+                    <span class="infolab">客服电话：</span>
+                    <a href="tel:02152992729">021-52992729</a>
+                    <div class="about_us_content" style="font-size: x-small;position: relative;top: -16px;right: -108px;">(服务时间: 09:00~18:00)</div>
+
+                </div>
+                <div class="infocol">
+                    <span class="infolab">微信号：</span>
+                    <span class="about_us_content">comoclass</span>
+                </div>
+
+            </div>
+            <div class="content-block">
+                <p><a href="javascript:;" class="button button-big">检查更新 </a></p>
+
+                <p><a href="javascript:;" class="button button-big">给我评分 </a></p>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>
+<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/common.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/setting.js' charset='utf-8'></script>
+</body>
+</html>
